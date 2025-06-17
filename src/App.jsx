@@ -5,6 +5,7 @@ import { lazy } from "react";
 import GeneralLayout from "./layouts/GeneralLayout";
 const HomePageGuest = lazy(() => import("./features/guest/Home/HomePage"));
 const Register = lazy(() => import("./features/guest/Register/Register"));
+const Login = lazy(() => import("./features/guest/Login/Login"));
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route element={<GeneralLayout />}>
             <Route index element={<HomePageGuest />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
           </Route>
         </Routes>
       </BrowserRouter>

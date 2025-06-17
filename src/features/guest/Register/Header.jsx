@@ -8,10 +8,7 @@ function Header() {
       </h1>
       <p className="text-xs text-gray-700 sm:text-sm">
         Nếu đã có tài khoản tại Valhalla Meds, vui lòng{" "}
-        <Link
-          to="/signin"
-          className="font-medium text-blue-600 hover:underline"
-        >
+        <Link to="/login" className="font-medium text-blue-600 hover:underline">
           đăng nhập
         </Link>
       </p>
