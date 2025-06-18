@@ -3,12 +3,16 @@ import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 import { Controller } from "react-hook-form";
 
-export default function ContactInfoSection({ register, errors, control }) {
+function ContactInfoSection({ register, errors, control }) {
   return (
-    <div className="space-y-6">
-      <h2 className="text-lg font-medium text-gray-900 border-l-4 border-blue-500 pl-3">
-        Thông tin liên hệ
-      </h2>
+    <div className="bg-white p-6 rounded-2xl shadow-md space-y-8 border border-gray-100">
+      {/* Section Title */}
+      <div className="flex items-center space-x-3">
+        <div className="h-6 w-1.5 bg-blue-600 rounded-sm" />
+        <h2 className="text-xl font-semibold text-gray-900">
+          Thông tin liên hệ
+        </h2>
+      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Phone Number */}
@@ -35,7 +39,7 @@ export default function ContactInfoSection({ register, errors, control }) {
                 defaultCountry="VN"
                 id="patient.phoneNumber"
                 placeholder="Nhập số điện thoại của bạn"
-                className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition duration-150"
+                className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-green-500 transition duration-150"
                 value={field.value}
                 onChange={(value) => field.onChange(value)}
               />
@@ -74,7 +78,11 @@ export default function ContactInfoSection({ register, errors, control }) {
       </div>
 
       {/* reCAPTCHA */}
-      <div id="recaptcha" className="flex justify-center mt-2"></div>
+      <div id="recaptcha" className="flex justify-center pt-4">
+        {/* reCAPTCHA will render here */}
+      </div>
     </div>
   );
 }
+
+export default ContactInfoSection;

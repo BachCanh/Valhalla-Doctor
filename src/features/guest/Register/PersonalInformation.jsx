@@ -5,10 +5,14 @@ import { Controller } from "react-hook-form";
 
 export default function PersonalInfoSection({ register, errors, control }) {
   return (
-    <div className="space-y-6">
-      <h2 className="text-lg font-medium text-gray-900 border-l-4 border-blue-500 pl-3">
-        Thông tin cá nhân
-      </h2>
+    <div className="bg-white p-6 rounded-2xl shadow-md space-y-8 border border-gray-100">
+      {/* Section Heading */}
+      <div className="flex items-center space-x-3">
+        <div className="h-6 w-1.5 bg-blue-600 rounded-sm" />
+        <h2 className="text-xl font-semibold text-gray-900">
+          Thông tin cá nhân
+        </h2>
+      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Full Name */}
@@ -85,11 +89,11 @@ export default function PersonalInfoSection({ register, errors, control }) {
 
         {/* Gender */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-gray-700 mb-1">
             Giới tính
           </label>
           <div className="flex items-center gap-6">
-            <label className="inline-flex items-center text-gray-700">
+            <label className="inline-flex items-center text-gray-700 cursor-pointer">
               <input
                 type="radio"
                 value="male"
@@ -100,7 +104,7 @@ export default function PersonalInfoSection({ register, errors, control }) {
               />
               <span className="ml-2">Nam</span>
             </label>
-            <label className="inline-flex items-center text-gray-700">
+            <label className="inline-flex items-center text-gray-700 cursor-pointer">
               <input
                 type="radio"
                 value="female"

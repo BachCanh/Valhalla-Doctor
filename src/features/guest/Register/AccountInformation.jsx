@@ -1,11 +1,16 @@
 // FormSections/AccountInfoSection.jsx
-export default function AccountInfoSection({ register, errors, watch }) {
+function AccountInfoSection({ register, errors, watch }) {
   return (
-    <div className="space-y-6">
-      <h2 className="text-lg font-medium text-gray-900 border-l-4 border-blue-500 pl-3">
-        Thông tin tài khoản
-      </h2>
+    <div className="bg-white p-6 rounded-2xl shadow-md space-y-8 border border-gray-100">
+      {/* Section Heading */}
+      <div className="flex items-center space-x-3">
+        <div className="h-6 w-1.5 bg-blue-600 rounded-sm" />
+        <h2 className="text-xl font-semibold text-gray-900">
+          Thông tin tài khoản
+        </h2>
+      </div>
 
+      {/* Form Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Email */}
         <div className="md:col-span-2">
@@ -92,3 +97,5 @@ export default function AccountInfoSection({ register, errors, watch }) {
     </div>
   );
 }
+
+export default AccountInfoSection;
