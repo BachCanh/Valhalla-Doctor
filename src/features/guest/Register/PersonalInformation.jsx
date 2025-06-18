@@ -1,88 +1,128 @@
-// FormSections/ContactInfoSection.jsx
-import PhoneInput from "react-phone-number-input";
-import "react-phone-number-input/style.css";
+// FormSections/PersonalInfoSection.jsx
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import { Controller } from "react-hook-form";
 
-function ContactInfoSection({ register, errors, control }) {
+export default function PersonalInfoSection({ register, errors, control }) {
   return (
     <div className="bg-white p-6 rounded-2xl shadow-md space-y-8 border border-gray-100">
-      {/* Section Title */}
+      {/* Section Heading */}
       <div className="flex items-center space-x-3">
         <div className="h-6 w-1.5 bg-blue-600 rounded-sm" />
         <h2 className="text-xl font-semibold text-gray-900">
-          Thông tin liên hệ
+          Thông tin cá nhân
         </h2>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Phone Number */}
-        <div>
+        {/* Full Name */}
+        <div className="md:col-span-2">
           <label
-            htmlFor="patient.phoneNumber"
+            htmlFor="patient.fullName"
             className="block text-md font-medium text-gray-800 mb-2"
           >
-            Số điện thoại di động
-          </label>
-          <Controller
-            control={control}
-            name="patient.phoneNumber"
-            rules={{
-              required: "Vui lòng nhập số điện thoại",
-              pattern: {
-                value: /^(0|\+84)[3|5|7|8|9][0-9]{8}$/,
-                message: "Số điện thoại không hợp lệ",
-              },
-            }}
-            render={({ field }) => (
-              <PhoneInput
-                international
-                defaultCountry="VN"
-                id="patient.phoneNumber"
-                placeholder="Nhập số điện thoại của bạn"
-                className="w-full rounded-xl border border-gray-300 bg-gray-50 px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-sm transition"
-                value={field.value}
-                onChange={(value) => field.onChange(value)}
-              />
-            )}
-          />
-          {errors.patient?.phoneNumber && (
-            <p className="mt-1 text-sm text-red-500">
-              {errors.patient.phoneNumber.message}
-            </p>
-          )}
-        </div>
-
-        {/* Address */}
-        <div>
-          <label
-            htmlFor="patient.address"
-            className="block text-md font-medium text-gray-800 mb-2"
-          >
-            Địa chỉ thường trú
+            Họ và tên
           </label>
           <input
             type="text"
-            id="patient.address"
-            placeholder="Nhập địa chỉ của bạn"
-            className="w-full rounded-xl border border-gray-300 bg-gray-50 px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-sm transition"
-            {...register("patient.address", {
-              required: "Vui lòng nhập địa chỉ",
+            id="patient.fullName"
+            placeholder="Nhập họ và tên"
+            className="w-full rounded-xl border border-gray-300 px-4 py-3 text-gray-900 placeholder-gray-400 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-sm transition"
+            {...register("patient.fullName", {
+              required: "Vui lòng nhập họ và tên",
             })}
           />
-          {errors.patient?.address && (
+          {errors.patient?.fullName && (
             <p className="mt-1 text-sm text-red-500">
-              {errors.patient.address.message}
+              {errors.patient.fullName.message}
             </p>
           )}
         </div>
-      </div>
 
-      {/* reCAPTCHA */}
-      <div id="recaptcha" className="flex justify-center pt-4">
-        {/* reCAPTCHA will render here */}
+        {/* Date of Birth */}
+        <div>
+          <label
+            htmlFor="patient.dateOfBirth"
+            className="block text-md font-medium text-gray-800 mb-2"
+          >
+            Ngày sinh
+          </label>
+          <Controller
+            control={control}
+            name="patient.dateOfBirth"
+            rules={{
+              required: "Vui lòng chọn ngày sinh",
+              validate: (value) => {
+                const birthDate = new Date(value);
+                const today = new Date();
+                const age = today.getFullYear() - birthDate.getFullYear();
+                const hasHadBirthday =
+                  today.getMonth() > birthDate.getMonth() ||
+                  (today.getMonth() === birthDate.getMonth() &&
+                    today.getDate() >= birthDate.getDate());
+                const finalAge = hasHadBirthday ? age : age - 1;
+                return finalAge >= 18 || "Bạn phải đủ 18 tuổi trở lên";
+              },
+            }}
+            render={({ field }) => (
+              <DatePicker
+                id="patient.dateOfBirth"
+                placeholderText="Chọn ngày sinh"
+                dateFormat="dd/MM/yyyy"
+                className="w-full rounded-xl border border-gray-300 px-4 py-3 text-gray-900 placeholder-gray-400 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-sm transition"
+                selected={field.value}
+                onChange={(date) => field.onChange(date)}
+                onBlur={field.onBlur}
+                showMonthDropdown
+                showYearDropdown
+                dropdownMode="select"
+                maxDate={new Date()}
+              />
+            )}
+          />
+          {errors.patient?.dateOfBirth && (
+            <p className="mt-1 text-sm text-red-500">
+              {errors.patient.dateOfBirth.message}
+            </p>
+          )}
+        </div>
+
+        {/* Gender */}
+        <div>
+          <label className="block text-md font-medium text-gray-800 mb-2">
+            Giới tính
+          </label>
+          <div className="flex items-center gap-6">
+            <label className="inline-flex items-center text-gray-700 cursor-pointer">
+              <input
+                type="radio"
+                value="male"
+                className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300"
+                {...register("patient.gender", {
+                  required: "Vui lòng chọn giới tính",
+                })}
+              />
+              <span className="ml-2">Nam</span>
+            </label>
+            <label className="inline-flex items-center text-gray-700 cursor-pointer">
+              <input
+                type="radio"
+                value="female"
+                className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300"
+                {...register("patient.gender", {
+                  required: "Vui lòng chọn giới tính",
+                })}
+              />
+              <span className="ml-2">Nữ</span>
+            </label>
+          </div>
+          {errors.patient?.gender && (
+            <p className="mt-1 text-sm text-red-500">
+              {errors.patient.gender.message}
+            </p>
+          )}
+        </div>
       </div>
     </div>
   );
 }
-
-export default ContactInfoSection;
