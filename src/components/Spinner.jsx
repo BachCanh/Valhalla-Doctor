@@ -1,3 +1,4 @@
+
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
 function Spinner() {
@@ -17,5 +18,4 @@ function Spinner() {
     </div>
   );
 }
-
 export default Spinner;
