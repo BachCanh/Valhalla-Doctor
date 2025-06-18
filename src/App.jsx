@@ -43,7 +43,7 @@ function App() {
                 element={<AppointmentPage />}
               />
               <Route
-                path="/appointment-history"
+                path="/customer/appointment-history"
                 element={<AppointmentHistory />}
               />
               <Route path="/contact" element={<Contact />} />
