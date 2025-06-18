@@ -2,7 +2,7 @@ import React, { useState, Fragment } from "react";
 import DoctorCard from "./DoctorCard";
 import useGetDoctorsWithDepartmentId from "../../../hooks/useGetDoctorsWithDepartmentId";
 import { useParams } from "react-router-dom";
-import SubHeader from "../TrackSymtoms/SubHeader";
+import SubHeader from "../TrackSymptoms/SubHeader";
 
 function Doctors() {
   const { departmentId } = useParams();
