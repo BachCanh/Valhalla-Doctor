@@ -6,6 +6,7 @@ import GeneralLayout from "./layouts/GeneralLayout";
 const HomePageGuest = lazy(() => import("./features/guest/Home/HomePage"));
 const Register = lazy(() => import("./features/guest/Register/Register"));
 const Login = lazy(() => import("./features/guest/Login/Login"));
+const Doctors = lazy(() => import("./features/guest/Doctors/Doctors"));
 
 function App() {
   return (
@@ -16,6 +17,10 @@ function App() {
             <Route index element={<HomePageGuest />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
+            <Route
+              path="/appointment/departments/doctors"
+              element={<Doctors />}
+            />
           </Route>
         </Routes>
       </BrowserRouter>
