@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
 import useFetchDepartmentsBySymptoms from "../../../hooks/useFetchDepartmentsBySymptoms";
-import SubHeader from "./SubHeader";
+import SubHeader from "../../../components/SubHeader";
 import TrackSymtoms from "./TrackSymptomsSection/TrackSymptoms";
 import DepartmentSection from "./DepartmentSection/DepartmentSection";
 
@@ -55,8 +55,8 @@ function TrackSymtomsPage() {
   return (
     <div className="">
       <SubHeader
-        title="Symptoms"
-        subtitle="Lorem ipsum dolor sit amet consectetur adipisicing."
+        title="Tra cứu triệu chứng"
+        subtitle="Chọn triệu chứng để tìm kiếm chuyên khoa phù hợp."
       />
       <div className="max-w-6xl mx-auto px-8">
         <TrackSymtoms

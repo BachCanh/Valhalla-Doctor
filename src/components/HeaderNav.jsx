@@ -42,22 +42,12 @@ const HeaderNav = ({ open, setOpen, isLoggedIn, data, avatar, content }) => {
           </li>
           <li>
             <NavLink
-              to="/service"
+              to="/appointment"
               className={({ isActive }) =>
                 isActive ? "text-blue-600" : "hover:text-blue-500"
               }
             >
               Service
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/doctors"
-              className={({ isActive }) =>
-                isActive ? "text-blue-600" : "hover:text-blue-500"
-              }
-            >
-              Doctors
             </NavLink>
           </li>
           <li>
@@ -80,12 +70,25 @@ const HeaderNav = ({ open, setOpen, isLoggedIn, data, avatar, content }) => {
               Blog
             </NavLink>
           </li>
+
           {!isLoggedIn && (
-            <li>
-              <Link to="/login" className="hover:text-blue-500">
-                Login
-              </Link>
-            </li>
+            <>
+              <li>
+                <NavLink
+                  to="/register"
+                  className={({ isActive }) =>
+                    isActive ? "text-blue-600" : "hover:text-blue-500"
+                  }
+                >
+                  Register
+                </NavLink>
+              </li>
+              <li>
+                <Link to="/login" className="hover:text-blue-500">
+                  Login
+                </Link>
+              </li>
+            </>
           )}
         </ul>
 

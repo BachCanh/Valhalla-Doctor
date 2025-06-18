@@ -1,8 +1,10 @@
-import React, { useState, Fragment } from "react";
+import React, { useState } from "react";
 import DoctorCard from "./DoctorCard";
 import useGetDoctorsWithDepartmentId from "../../../hooks/useGetDoctorsWithDepartmentId";
 import { useParams } from "react-router-dom";
-import SubHeader from "../TrackSymptoms/SubHeader";
+import SubHeader from "../../../components/SubHeader";
+import Pagination from "./Pagination";
+
 
 function Doctors() {
   const { departmentId } = useParams();
@@ -16,7 +18,6 @@ function Doctors() {
     error,
   } = useGetDoctorsWithDepartmentId(departmentId);
 
-
   // Calculate pagination values
   const indexOfLastDoctor = currentPage * doctorsPerPage;
   const indexOfFirstDoctor = indexOfLastDoctor - doctorsPerPage;
@@ -26,13 +27,16 @@ function Doctors() {
   );
   const totalPages = Math.ceil(listDoctors.length / doctorsPerPage);
 
-  // Page navigation functions
-  const goToPage = (pageNumber) => setCurrentPage(pageNumber);
-  const nextPage = () =>
-    currentPage < totalPages && setCurrentPage(currentPage + 1);
-  const prevPage = () => currentPage > 1 && setCurrentPage(currentPage - 1);
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
   if (isLoading) {
-    return <div className="text-center py-10">Loading doctors...</div>;
+    return (
+      <div className="text-center py-10">
+        Mong bạn kiên nhẫn trong giây lát...
+      </div>
+    );
   }
 
   if (isError) {
@@ -76,7 +80,7 @@ function Doctors() {
     );
   }
 
-  console.log("Doctors list:", listDoctors);
+  const departmentName = listDoctors[0].Department.name;
 
   return (
     <div className="font-sans p-4">
@@ -84,86 +88,39 @@ function Doctors() {
         title="Bác Sĩ"
         subtitle="Danh sách các bác sĩ phù hợp với yêu cầu của bạn."
       />
+      {/* Department Header */}
+      {departmentName && (
+        <div className="w-4/5 mx-auto mt-5 bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r shadow-sm">
+          <h2 className="text-2xl font-semibold text-blue-800">
+            Chuyên Khoa: {departmentName}
+          </h2>
+        </div>
+      )}
+      {/* Doctors List */}
       <div className="w-4/5 mx-auto mt-5">
         <h3 className="text-lg font-semibold mb-4">
           Tìm thấy {listDoctors?.length || 0} bác sĩ phù hợp.
         </h3>
-        {listDoctors && listDoctors.length > 0 ? (
-          <>
-            {/* Display current page doctors */}
-            {currentDoctors.map((doctor) => (
-              <DoctorCard
-                key={doctor.user_id}
-                id={doctor.user_id}
-                name={doctor.User.fullname}
-                departmentId={doctor.Department.id}
-                department={doctor.Department.name}
-                email={doctor.User.email}
-                phone={doctor.User.phone_number}
-                bio={doctor.bio}
-              />
-            ))}
+        {/* Display current page doctors */}
+        {currentDoctors.map((doctor) => (
+          <DoctorCard
+            key={doctor.user_id}
+            id={doctor.user_id}
+            name={doctor.User.fullname}
+            departmentId={doctor.Department.id}
+            department={doctor.Department.name}
+            email={doctor.User.email}
+            phone={doctor.User.phone_number}
+            bio={doctor.bio}
+          />
+        ))}
 
-            {/* Pagination controls */}
-            {totalPages > 1 && (
-              <div className="flex justify-center items-center space-x-2 mt-8">
-                <button
-                  onClick={prevPage}
-                  disabled={currentPage === 1}
-                  className={`px-3 py-1 rounded border ${
-                    currentPage === 1
-                      ? "bg-gray-100 text-gray-400 cursor-not-allowed"
-                      : "bg-white text-blue-600 hover:bg-blue-50"
-                  }`}
-                >
-                  &laquo; Trước
-                </button>
-
-                {/* Page numbers */}
-                <div className="flex space-x-1">
-                  {Array.from({ length: totalPages }, (_, i) => i + 1)
-                    .filter(
-                      (num) =>
-                        num === 1 ||
-                        num === totalPages ||
-                        (num >= currentPage - 1 && num <= currentPage + 1)
-                    )
-                    .map((number, idx, array) => (
-                      <Fragment key={number}>
-                        {idx > 0 && array[idx - 1] !== number - 1 && (
-                          <span className="px-3 py-1">...</span>
-                        )}
-                        <button
-                          onClick={() => goToPage(number)}
-                          className={`px-3 py-1 rounded ${
-                            currentPage === number
-                              ? "bg-blue-600 text-white"
-                              : "bg-white text-blue-600 hover:bg-blue-50"
-                          }`}
-                        >
-                          {number}
-                        </button>
-                      </Fragment>
-                    ))}
-                </div>
-
-                <button
-                  onClick={nextPage}
-                  disabled={currentPage === totalPages}
-                  className={`px-3 py-1 rounded border ${
-                    currentPage === totalPages
-                      ? "bg-gray-100 text-gray-400 cursor-not-allowed"
-                      : "bg-white text-blue-600 hover:bg-blue-50"
-                  }`}
-                >
-                  Sau &raquo;
-                </button>
-              </div>
-            )}
-          </>
-        ) : (
-          <></>
-        )}
+        {/* Use the Pagination component */}
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+        />
       </div>
     </div>
   );
