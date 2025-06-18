@@ -9,30 +9,32 @@ export default function PersonalInfoSection({ register, errors, control }) {
       {/* Section Heading */}
       <div className="flex items-center space-x-3">
         <div className="h-6 w-1.5 bg-blue-600 rounded-sm" />
-        <h2 className="text-xl font-semibold text-gray-900">Thông tin cá nhân</h2>
+        <h2 className="text-xl font-semibold text-gray-900">
+          Thông tin cá nhân
+        </h2>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Full Name */}
         <div className="md:col-span-2">
           <label
-            htmlFor="customer.fullName"
+            htmlFor="patient.fullName"
             className="block text-md font-medium text-gray-800 mb-2"
           >
             Họ và tên
           </label>
           <input
             type="text"
-            id="customer.fullName"
+            id="patient.fullName"
             placeholder="Nhập họ và tên"
             className="w-full rounded-xl border border-gray-300 px-4 py-3 text-gray-900 placeholder-gray-400 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-sm transition"
-            {...register("customer.fullName", {
+            {...register("patient.fullName", {
               required: "Vui lòng nhập họ và tên",
             })}
           />
-          {errors.customer?.fullName && (
+          {errors.patient?.fullName && (
             <p className="mt-1 text-sm text-red-500">
-              {errors.customer.fullName.message}
+              {errors.patient.fullName.message}
             </p>
           )}
         </div>
@@ -40,14 +42,14 @@ export default function PersonalInfoSection({ register, errors, control }) {
         {/* Date of Birth */}
         <div>
           <label
-            htmlFor="customer.dateOfBirth"
+            htmlFor="patient.dateOfBirth"
             className="block text-md font-medium text-gray-800 mb-2"
           >
             Ngày sinh
           </label>
           <Controller
             control={control}
-            name="customer.dateOfBirth"
+            name="patient.dateOfBirth"
             rules={{
               required: "Vui lòng chọn ngày sinh",
               validate: (value) => {
@@ -64,7 +66,7 @@ export default function PersonalInfoSection({ register, errors, control }) {
             }}
             render={({ field }) => (
               <DatePicker
-                id="customer.dateOfBirth"
+                id="patient.dateOfBirth"
                 placeholderText="Chọn ngày sinh"
                 dateFormat="dd/MM/yyyy"
                 className="w-full rounded-xl border border-gray-300 px-4 py-3 text-gray-900 placeholder-gray-400 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-sm transition"
@@ -78,9 +80,9 @@ export default function PersonalInfoSection({ register, errors, control }) {
               />
             )}
           />
-          {errors.customer?.dateOfBirth && (
+          {errors.patient?.dateOfBirth && (
             <p className="mt-1 text-sm text-red-500">
-              {errors.customer.dateOfBirth.message}
+              {errors.patient.dateOfBirth.message}
             </p>
           )}
         </div>
@@ -96,7 +98,7 @@ export default function PersonalInfoSection({ register, errors, control }) {
                 type="radio"
                 value="male"
                 className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300"
-                {...register("customer.gender", {
+                {...register("patient.gender", {
                   required: "Vui lòng chọn giới tính",
                 })}
               />
@@ -107,16 +109,16 @@ export default function PersonalInfoSection({ register, errors, control }) {
                 type="radio"
                 value="female"
                 className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300"
-                {...register("customer.gender", {
+                {...register("patient.gender", {
                   required: "Vui lòng chọn giới tính",
                 })}
               />
               <span className="ml-2">Nữ</span>
             </label>
           </div>
-          {errors.customer?.gender && (
+          {errors.patient?.gender && (
             <p className="mt-1 text-sm text-red-500">
-              {errors.customer.gender.message}
+              {errors.patient.gender.message}
             </p>
           )}
         </div>

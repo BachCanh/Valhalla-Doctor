@@ -9,21 +9,23 @@ function ContactInfoSection({ register, errors, control }) {
       {/* Section Title */}
       <div className="flex items-center space-x-3">
         <div className="h-6 w-1.5 bg-blue-600 rounded-sm" />
-        <h2 className="text-xl font-semibold text-gray-900">Thông tin liên hệ</h2>
+        <h2 className="text-xl font-semibold text-gray-900">
+          Thông tin liên hệ
+        </h2>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Phone Number */}
         <div>
           <label
-            htmlFor="customer.phoneNumber"
+            htmlFor="patient.phoneNumber"
             className="block text-md font-medium text-gray-800 mb-2"
           >
             Số điện thoại di động
           </label>
           <Controller
             control={control}
-            name="customer.phoneNumber"
+            name="patient.phoneNumber"
             rules={{
               required: "Vui lòng nhập số điện thoại",
               pattern: {
@@ -35,7 +37,7 @@ function ContactInfoSection({ register, errors, control }) {
               <PhoneInput
                 international
                 defaultCountry="VN"
-                id="customer.phoneNumber"
+                id="patient.phoneNumber"
                 placeholder="Nhập số điện thoại của bạn"
                 className="w-full rounded-xl border border-gray-300 bg-gray-50 px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-sm transition"
                 value={field.value}
@@ -43,9 +45,9 @@ function ContactInfoSection({ register, errors, control }) {
               />
             )}
           />
-          {errors.customer?.phoneNumber && (
+          {errors.patient?.phoneNumber && (
             <p className="mt-1 text-sm text-red-500">
-              {errors.customer.phoneNumber.message}
+              {errors.patient.phoneNumber.message}
             </p>
           )}
         </div>
@@ -53,23 +55,23 @@ function ContactInfoSection({ register, errors, control }) {
         {/* Address */}
         <div>
           <label
-            htmlFor="customer.address"
+            htmlFor="patient.address"
             className="block text-md font-medium text-gray-800 mb-2"
           >
             Địa chỉ thường trú
           </label>
           <input
             type="text"
-            id="customer.address"
+            id="patient.address"
             placeholder="Nhập địa chỉ của bạn"
             className="w-full rounded-xl border border-gray-300 bg-gray-50 px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-sm transition"
-            {...register("customer.address", {
+            {...register("patient.address", {
               required: "Vui lòng nhập địa chỉ",
             })}
           />
-          {errors.customer?.address && (
+          {errors.patient?.address && (
             <p className="mt-1 text-sm text-red-500">
-              {errors.customer.address.message}
+              {errors.patient.address.message}
             </p>
           )}
         </div>

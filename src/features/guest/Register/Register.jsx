@@ -1,12 +1,15 @@
 import { useForm } from "react-hook-form";
 import AccountInfoSection from "./AccountInformation";
-import { Link } from "react-router-dom"; // fixed import (was from "react-router")
+import { Link } from "react-router-dom";
 import { useState } from "react";
 import ContactInfoSection from "./ContactInformation";
 import PersonalInfoSection from "./PersonalInformation";
 import Header from "./Header";
 import TermsAndCondition from "./TermsAndCondition";
 import SubmitButton from "./SubmitButton";
+import useSignUp from "../../../hooks/useSignUp";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function SignUp() {
   const {
@@ -19,15 +22,21 @@ function SignUp() {
     getValues,
   } = useForm();
 
-  const isAgree = watch("isAgree", false); // Get checkbox value
+  const { registerUser, isCreatingUser, isError, error } = useSignUp();
+
+  const isAgree = watch("isAgree", false);
 
   const onSubmit = (data) => {
-    console.log("Form submitted:", data);
-    // Call API or navigate to next step
+    // If user hasn't agreed to terms, don't submit
+    if (!isAgree) return;
+    console.log("Form data submitted:", data);
+    // Call the registerUser function from our custom hook
+    registerUser(data);
   };
 
   return (
     <section className="flex flex-col items-center justify-center px-2 mx-4 my-4 sm:mx-4 md:mx-6 md:my-6 sm:px-4 ">
+      <ToastContainer />
       <div className="w-full max-w-4xl p-4 bg-white shadow-lg sm:p-6 md:p-8 rounded-xl shadow-gray-300/60">
         {/* Header */}
         <Header />
@@ -56,7 +65,7 @@ function SignUp() {
           <TermsAndCondition register={register} errors={errors} />
 
           {/* Submit button */}
-          <SubmitButton isAgree={isAgree} />
+          <SubmitButton isAgree={isAgree} isLoading={isCreatingUser} />
         </form>
       </div>
     </section>

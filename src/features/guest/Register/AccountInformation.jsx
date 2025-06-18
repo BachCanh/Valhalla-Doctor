@@ -15,17 +15,17 @@ function AccountInfoSection({ register, errors, watch }) {
         {/* Email */}
         <div className="md:col-span-2">
           <label
-            htmlFor="customer.email"
+            htmlFor="patient.email"
             className="block text-md font-medium text-gray-800 mb-2"
           >
             Email
           </label>
           <input
             type="email"
-            id="customer.email"
+            id="patient.email"
             placeholder="Nhập email của bạn"
             className="w-full rounded-xl border border-gray-300 px-4 py-3 text-gray-900 placeholder-gray-400 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
-            {...register("customer.email", {
+            {...register("patient.email", {
               required: "Vui lòng nhập email",
               pattern: {
                 value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
@@ -33,9 +33,9 @@ function AccountInfoSection({ register, errors, watch }) {
               },
             })}
           />
-          {errors.customer?.email && (
+          {errors.patient?.email && (
             <p className="mt-1 text-sm text-red-500">
-              {errors.customer.email.message}
+              {errors.patient.email.message}
             </p>
           )}
         </div>
@@ -43,17 +43,17 @@ function AccountInfoSection({ register, errors, watch }) {
         {/* Password */}
         <div>
           <label
-            htmlFor="customer.password"
+            htmlFor="patient.password"
             className="block text-md font-medium text-gray-800 mb-2"
           >
             Mật khẩu
           </label>
           <input
             type="password"
-            id="customer.password"
+            id="patient.password"
             placeholder="Nhập mật khẩu"
             className="w-full rounded-xl border border-gray-300 px-4 py-3 text-gray-900 placeholder-gray-400 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
-            {...register("customer.password", {
+            {...register("patient.password", {
               required: "Vui lòng nhập mật khẩu",
               minLength: {
                 value: 6,
@@ -61,9 +61,9 @@ function AccountInfoSection({ register, errors, watch }) {
               },
             })}
           />
-          {errors.customer?.password && (
+          {errors.patient?.password && (
             <p className="mt-1 text-sm text-red-500">
-              {errors.customer.password.message}
+              {errors.patient.password.message}
             </p>
           )}
         </div>
@@ -71,31 +71,30 @@ function AccountInfoSection({ register, errors, watch }) {
         {/* Confirm Password */}
         <div>
           <label
-            htmlFor="customer.confirmPassword"
+            htmlFor="patient.confirmPassword"
             className="block text-md font-medium text-gray-800 mb-2"
           >
             Xác nhận mật khẩu
           </label>
           <input
             type="password"
-            id="customer.confirmPassword"
+            id="patient.confirmPassword"
             placeholder="Nhập lại mật khẩu"
             className="w-full rounded-xl border border-gray-300 px-4 py-3 text-gray-900 placeholder-gray-400 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
-            {...register("customer.confirmPassword", {
+            {...register("patient.confirmPassword", {
               required: "Vui lòng xác nhận mật khẩu",
               validate: (value) =>
-                value === watch("customer.password") || "Mật khẩu không khớp",
+                value === watch("patient.password") || "Mật khẩu không khớp",
             })}
           />
-          {errors.customer?.confirmPassword && (
+          {errors.patient?.confirmPassword && (
             <p className="mt-1 text-sm text-red-500">
-              {errors.customer.confirmPassword.message}
+              {errors.patient.confirmPassword.message}
             </p>
           )}
         </div>
       </div>
     </div>
-
   );
 }
 
