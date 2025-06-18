@@ -1,7 +1,7 @@
 import { useState } from "react";
 import AppointmentCard from "./AppointmentCard";
-import useMyAppointments from "../../hooks/useGetUserAppointments";
-import { useAuthContext } from "../../context/AuthContext";
+import useMyAppointments from "../../../hooks/useGetUserAppointments";
+import { useAuthContext } from "../../../context/AuthContext";
 import { Navigate } from "react-router";
 // function filterAppointments(data, status) {
 //   const now = new Date();
