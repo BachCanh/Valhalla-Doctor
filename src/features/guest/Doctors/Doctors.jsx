@@ -2,6 +2,7 @@ import React, { useState, Fragment } from "react";
 import DoctorCard from "./DoctorCard";
 import useGetDoctorsWithDepartmentId from "../../../hooks/useGetDoctorsWithDepartmentId";
 import { useParams } from "react-router-dom";
+import SubHeader from "../TrackSymtoms/SubHeader";
 
 function Doctors() {
   const { departmentId } = useParams();
@@ -79,9 +80,13 @@ function Doctors() {
 
   return (
     <div className="font-sans p-4">
-      <div className="w-4/5 mx-auto">
+      <SubHeader
+        title="Bác Sĩ"
+        subtitle="Danh sách các bác sĩ phù hợp với yêu cầu của bạn."
+      />
+      <div className="w-4/5 mx-auto mt-5">
         <h3 className="text-lg font-semibold mb-4">
-          Tìm thấy {listDoctors?.length || 0} kết quả.
+          Tìm thấy {listDoctors?.length || 0} bác sĩ phù hợp.
         </h3>
         {listDoctors && listDoctors.length > 0 ? (
           <>
