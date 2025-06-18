@@ -8,7 +8,9 @@ import { ToastContainer } from "react-toastify";
 const HomePageGuest = lazy(() => import("./features/guest/Home/HomePage"));
 const Register = lazy(() => import("./features/guest/Register/Register"));
 const Login = lazy(() => import("./features/guest/Login/Login"));
-
+const Appointment = lazy(() =>
+  import("./features/guest/Appointment/AppointmentPage")
+);
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
