@@ -1,4 +1,4 @@
-function DoctorCard({ name, department, bio }) {
+function DoctorCard({ name, department, bio, email, phone }) {
   return (
     <div>
       <div className="flex items-center border-b border-gray-300 py-4">
@@ -9,11 +9,17 @@ function DoctorCard({ name, department, bio }) {
         />
         <div className="flex-1">
           <div className="font-bold text-base">{name}</div>
-          <div className="text-gray-500 my-1">{department}</div>
+          <div className="inline-flex items-center bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium my-1 shadow-sm">
+            {department}
+          </div>
+          <div className="text-sm text-gray-600 my-1">
+            <div>Email: {email}</div>
+            <div>SĐT: {phone}</div>
+          </div>
           <div className="text-gray-700">{bio}</div>
         </div>
         <button className="px-3 py-2 bg-blue-500 text-white rounded cursor-pointer hover:bg-blue-600">
-          Đặt khám
+          Đặt Lịch Hẹn
         </button>
       </div>
     </div>
