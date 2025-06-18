@@ -19,7 +19,7 @@ function ContactInfoSection({ register, errors, control }) {
         <div>
           <label
             htmlFor="patient.phoneNumber"
-            className="block text-sm font-medium text-gray-700 mb-1"
+            className="block text-md font-medium text-gray-800 mb-2"
           >
             Số điện thoại di động
           </label>
@@ -39,14 +39,14 @@ function ContactInfoSection({ register, errors, control }) {
                 defaultCountry="VN"
                 id="patient.phoneNumber"
                 placeholder="Nhập số điện thoại của bạn"
-                className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-green-500 transition duration-150"
+                className="w-full rounded-xl border border-gray-300 bg-gray-50 px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-sm transition"
                 value={field.value}
                 onChange={(value) => field.onChange(value)}
               />
             )}
           />
           {errors.patient?.phoneNumber && (
-            <p className="mt-1 text-red-500 text-sm">
+            <p className="mt-1 text-sm text-red-500">
               {errors.patient.phoneNumber.message}
             </p>
           )}
@@ -56,7 +56,7 @@ function ContactInfoSection({ register, errors, control }) {
         <div>
           <label
             htmlFor="patient.address"
-            className="block text-sm font-medium text-gray-700 mb-1"
+            className="block text-md font-medium text-gray-800 mb-2"
           >
             Địa chỉ thường trú
           </label>
@@ -64,13 +64,13 @@ function ContactInfoSection({ register, errors, control }) {
             type="text"
             id="patient.address"
             placeholder="Nhập địa chỉ của bạn"
-            className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-green-500 transition duration-150"
+            className="w-full rounded-xl border border-gray-300 bg-gray-50 px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-sm transition"
             {...register("patient.address", {
               required: "Vui lòng nhập địa chỉ",
             })}
           />
           {errors.patient?.address && (
-            <p className="mt-1 text-red-500 text-sm">
+            <p className="mt-1 text-sm text-red-500">
               {errors.patient.address.message}
             </p>
           )}

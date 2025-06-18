@@ -16,7 +16,7 @@ function AccountInfoSection({ register, errors, watch }) {
         <div className="md:col-span-2">
           <label
             htmlFor="patient.email"
-            className="block text-sm font-medium text-gray-700 mb-1"
+            className="block text-md font-medium text-gray-800 mb-2"
           >
             Email
           </label>
@@ -24,7 +24,7 @@ function AccountInfoSection({ register, errors, watch }) {
             type="email"
             id="patient.email"
             placeholder="Nhập email của bạn"
-            className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-green-500 transition duration-150"
+            className="w-full rounded-xl border border-gray-300 px-4 py-3 text-gray-900 placeholder-gray-400 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
             {...register("patient.email", {
               required: "Vui lòng nhập email",
               pattern: {
@@ -34,7 +34,7 @@ function AccountInfoSection({ register, errors, watch }) {
             })}
           />
           {errors.patient?.email && (
-            <p className="mt-1 text-red-500 text-sm">
+            <p className="mt-1 text-sm text-red-500">
               {errors.patient.email.message}
             </p>
           )}
@@ -44,7 +44,7 @@ function AccountInfoSection({ register, errors, watch }) {
         <div>
           <label
             htmlFor="patient.password"
-            className="block text-sm font-medium text-gray-700 mb-1"
+            className="block text-md font-medium text-gray-800 mb-2"
           >
             Mật khẩu
           </label>
@@ -52,7 +52,7 @@ function AccountInfoSection({ register, errors, watch }) {
             type="password"
             id="patient.password"
             placeholder="Nhập mật khẩu"
-            className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-green-500 transition duration-150"
+            className="w-full rounded-xl border border-gray-300 px-4 py-3 text-gray-900 placeholder-gray-400 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
             {...register("patient.password", {
               required: "Vui lòng nhập mật khẩu",
               minLength: {
@@ -62,7 +62,7 @@ function AccountInfoSection({ register, errors, watch }) {
             })}
           />
           {errors.patient?.password && (
-            <p className="mt-1 text-red-500 text-sm">
+            <p className="mt-1 text-sm text-red-500">
               {errors.patient.password.message}
             </p>
           )}
@@ -72,7 +72,7 @@ function AccountInfoSection({ register, errors, watch }) {
         <div>
           <label
             htmlFor="patient.confirmPassword"
-            className="block text-sm font-medium text-gray-700 mb-1"
+            className="block text-md font-medium text-gray-800 mb-2"
           >
             Xác nhận mật khẩu
           </label>
@@ -80,7 +80,7 @@ function AccountInfoSection({ register, errors, watch }) {
             type="password"
             id="patient.confirmPassword"
             placeholder="Nhập lại mật khẩu"
-            className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-green-500 transition duration-150"
+            className="w-full rounded-xl border border-gray-300 px-4 py-3 text-gray-900 placeholder-gray-400 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
             {...register("patient.confirmPassword", {
               required: "Vui lòng xác nhận mật khẩu",
               validate: (value) =>
@@ -88,7 +88,7 @@ function AccountInfoSection({ register, errors, watch }) {
             })}
           />
           {errors.patient?.confirmPassword && (
-            <p className="mt-1 text-red-500 text-sm">
+            <p className="mt-1 text-sm text-red-500">
               {errors.patient.confirmPassword.message}
             </p>
           )}
