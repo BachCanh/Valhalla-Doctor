@@ -28,24 +28,15 @@ const HeroSection = () => {
         </p>
         <div className="flex flex-col md:flex-row justify-center gap-4">
           <Link
-            to="/doctors"
+            to="/appointment"
             className="
               uppercase font-bold text-sm md:text-base px-8 py-3 rounded-full
               bg-gradient-to-r from-[#1977cc] to-[#3291e6]
               shadow-lg hover:scale-105 transition-all duration-300
+              hover:bg-[#1977cc] hover:text-white
               "
           >
             Get Started
-          </Link>
-          <Link
-            to="/appointment"
-            className="
-              uppercase font-bold text-sm md:text-base px-8 py-3 rounded-full
-              bg-white text-[#1977cc] border-2 border-[#1977cc]
-              shadow-lg hover:bg-[#1977cc] hover:text-white transition-all duration-300
-              "
-          >
-            Your Sympton
           </Link>
         </div>
       </div>
