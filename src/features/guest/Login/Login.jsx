@@ -4,8 +4,13 @@ import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import SubmitButton from "./SubmitButton";
 import MovingAnimation from "./MovingAnimation";
+import useAuth from "../../../hooks/useAuth";
+// import { useAuthContext } from "../../../context/AuthContext";
 
 function Login() {
+  const { login, loading } = useAuth();
+  // const { isAuthenticated } = useAuthContext();
+
   const {
     register,
     handleSubmit,
@@ -16,9 +21,11 @@ function Login() {
   const togglePassword = () => setShowPassword((prev) => !prev);
 
   const onSubmit = (data) => {
-    console.log("Submitted:", data);
+    login(data); // just use the `data` received from react-hook-form
   };
-
+  // if (isAuthenticated) {
+  //   return <Navigate to="/" replace />;
+  // }
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-50 -mt-16 px-4">
       <div className="flex flex-col w-full max-w-6xl overflow-hidden bg-white rounded-2xl shadow-lg md:flex-row">
@@ -40,11 +47,15 @@ function Login() {
               </label>
               <input
                 type="text"
-                {...register("email", { required: "Vui lòng nhập email hoặc số điện thoại" })}
+                {...register("email", {
+                  required: "Vui lòng nhập email hoặc số điện thoại",
+                })}
                 className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               {errors.email && (
-                <p className="mt-1 text-sm text-red-500">{errors.email.message}</p>
+                <p className="mt-1 text-sm text-red-500">
+                  {errors.email.message}
+                </p>
               )}
             </div>
 
@@ -55,7 +66,9 @@ function Login() {
               </label>
               <input
                 type={showPassword ? "text" : "password"}
-                {...register("password", { required: "Vui lòng nhập mật khẩu" })}
+                {...register("password", {
+                  required: "Vui lòng nhập mật khẩu",
+                })}
                 className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 pr-10"
               />
               <div
@@ -65,13 +78,15 @@ function Login() {
                 {showPassword ? <FaEyeSlash /> : <FaEye />}
               </div>
               {errors.password && (
-                <p className="mt-1 text-sm text-red-500">{errors.password.message}</p>
+                <p className="mt-1 text-sm text-red-500">
+                  {errors.password.message}
+                </p>
               )}
             </div>
 
             {/* Button & Forgot */}
             <div className="flex flex-col items-center justify-between gap-4 sm:flex-row sm:gap-0">
-              <SubmitButton />
+              <SubmitButton loading={loading} />
               <Link
                 to="/forget-password"
                 className="text-sm text-blue-600 hover:underline text-center sm:text-right"

@@ -3,6 +3,8 @@ import queryClient from "./config/reactQuery";
 import { BrowserRouter, Route, Routes } from "react-router";
 import { lazy } from "react";
 import GeneralLayout from "./layouts/GeneralLayout";
+import AuthProvider from "./context/AuthContext";
+import { ToastContainer } from "react-toastify";
 const HomePageGuest = lazy(() => import("./features/guest/Home/HomePage"));
 const Register = lazy(() => import("./features/guest/Register/Register"));
 const Login = lazy(() => import("./features/guest/Login/Login"));
@@ -10,15 +12,30 @@ const Login = lazy(() => import("./features/guest/Login/Login"));
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <Routes>
-          <Route element={<GeneralLayout />}>
-            <Route index element={<HomePageGuest />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/login" element={<Login />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      <AuthProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route element={<GeneralLayout />}>
+              <Route index element={<HomePageGuest />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/login" element={<Login />} />
+            </Route>
+          </Routes>
+
+          <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+          />
+        </BrowserRouter>
+      </AuthProvider>
     </QueryClientProvider>
   );
 }
