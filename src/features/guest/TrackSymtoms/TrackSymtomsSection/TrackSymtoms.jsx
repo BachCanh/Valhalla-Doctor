@@ -1,5 +1,6 @@
 import { useState } from "react";
 import SymptomCard from "./SymptomCard";
+import { toast, ToastContainer } from "react-toastify";
 
 function TrackSymtoms() {
   const [selectedSymptoms, setSelectedSymptoms] = useState([]);
@@ -19,18 +20,6 @@ function TrackSymtoms() {
     "Mất vị giác",
     "Phát ban da",
     "Đau bụng",
-    "Chóng mặt",
-    "Khó ngủ",
-    "Đau đầu",
-    "Chảy nước mũi",
-    "Buồn nôn",
-    "Tiêu chảy",
-    "Mất vị giác",
-    "Phát ban da",
-    "Đau bụng",
-    "Chóng mặt",
-    "Khó ngủ",
-    "Đau đầu",
   ];
 
   const toggleSymptom = (symptom) => {
@@ -39,6 +28,20 @@ function TrackSymtoms() {
         ? prev.filter((s) => s !== symptom)
         : [...prev, symptom]
     );
+  };
+
+  const handleSubmit = () => {
+    if (selectedSymptoms.length === 0) {
+      toast.error("Vui lòng chọn ít nhất một triệu chứng!", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+      return;
+    }
   };
 
   return (
@@ -61,6 +64,23 @@ function TrackSymtoms() {
           />
         ))}
       </div>
+
+      <div className="flex justify-center">
+        <button
+          onClick={handleSubmit}
+          className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-8 rounded-lg transition-colors duration-200 shadow-md hover:shadow-lg"
+        >
+          Xác nhận triệu chứng ({selectedSymptoms.length})
+        </button>
+      </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        closeOnClick
+        pauseOnHover
+        draggable
+      />
     </div>
   );
 }
