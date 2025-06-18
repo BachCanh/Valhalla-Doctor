@@ -1,5 +1,7 @@
 // TrackSymptomsSection/TrackSymtoms.js
+import { useState, useMemo } from "react";
 import SymptomCard from "./SymptomCard";
+import SearchBar from "./SearchBar";
 import useFetchAllSymptoms from "../../../../hooks/useFetchAllSymptoms";
 
 function TrackSymtoms({
@@ -8,8 +10,25 @@ function TrackSymtoms({
   onFilter,
   onReset,
   isFilterLoading,
+  searchQuery,
+  setSearchQuery,
 }) {
   const { symptoms, isLoading, isError, error } = useFetchAllSymptoms();
+
+  console.log("TrackSymptoms - symptoms:", symptoms);
+
+  // Lọc symptoms dựa trên search query
+  const filteredSymptoms = useMemo(() => {
+    if (!symptoms) return [];
+
+    if (!searchQuery.trim()) {
+      return symptoms;
+    }
+
+    return symptoms.filter((symptom) =>
+      symptom.name.toLowerCase().includes(searchQuery.toLowerCase().trim())
+    );
+  }, [symptoms, searchQuery]);
 
   // Hiển thị loading state
   if (isLoading) {
@@ -36,20 +55,37 @@ function TrackSymtoms({
       <h2 className="text-2xl font-bold text-gray-800 mb-2">
         Chọn triệu chứng
       </h2>
-      <p className="text-gray-600 mb-6">
+      <p className="text-gray-600 mb-4">
         Nhấn vào các triệu chứng mà bạn đang gặp phải:
       </p>
 
+      {/* Search Bar Component */}
+      <SearchBar
+        searchQuery={searchQuery}
+        onSearchChange={setSearchQuery}
+        placeholder="Tìm kiếm triệu chứng..."
+        resultCount={filteredSymptoms.length}
+        searchTerm={searchQuery}
+      />
+
       {/* Container cho các cards - responsive flex wrap */}
       <div className="flex flex-wrap gap-3 mb-6">
-        {symptoms?.map((symptom) => (
-          <SymptomCard
-            key={symptom.id}
-            text={symptom.name}
-            isSelected={selectedSymptoms.includes(symptom.id)}
-            onClick={() => onToggleSymptom(symptom.id)}
-          />
-        ))}
+        {filteredSymptoms.length > 0 ? (
+          filteredSymptoms.map((symptom) => (
+            <SymptomCard
+              key={symptom.id}
+              text={symptom.name}
+              isSelected={selectedSymptoms.includes(symptom.id)}
+              onClick={() => onToggleSymptom(symptom.id)}
+            />
+          ))
+        ) : (
+          <div className="w-full text-center py-8 text-gray-500">
+            {searchQuery.trim()
+              ? "Không tìm thấy triệu chứng nào phù hợp"
+              : "Không có triệu chứng nào để hiển thị"}
+          </div>
+        )}
       </div>
 
       <div className="flex justify-center gap-4">
