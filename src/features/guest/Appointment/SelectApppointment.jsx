@@ -1,5 +1,5 @@
-import React from 'react'
-import { Button } from 'antd'
+import React from 'react';
+import { Button } from 'antd';
 import moment from 'moment';
 import { FaBriefcase, FaRegClock, FaLocationArrow, FaLink, FaCalendarAlt } from "react-icons/fa";
 
@@ -10,7 +10,7 @@ const doctorTimeSlot = [
     "04:30 PM", "05:00 PM"
 ]
 
-function SelectApppointment({ selectedDate, handleDateChange, selectTime, setSelectTime }) {
+function SelectApppointment({ selectedDate, handleDateChange, selectTime, setSelectTime, doctor = {} }) {
     const handleSelectTime = (date) => { setSelectTime(date) }
 
     const amTimeSlot = doctorTimeSlot.filter((item) => item.includes('AM'));
@@ -23,21 +23,32 @@ function SelectApppointment({ selectedDate, handleDateChange, selectTime, setSel
         moment().clone().add(index, 'days')
     );
     return (
-        <div className="mt-8">
+        <div className="mt-2">
             <div className="bg-gray-50 p-4 rounded-lg shadow-sm">
                 <div className="flex flex-col lg:flex-row">
                     {/* Column 1: Appointment Information */}
                     <div className="w-full lg:w-1/4 p-4 border-b lg:border-b-0 lg:border-r border-gray-200">
                         <h3 className="pb-2 mb-4 border-b border-gray-200 font-medium text-[#2c4964] text-base min-h-[60px]">
-                            Would you like to schedule an Interview? Pick a Date & Time
+                            Appointment Details
                         </h3>
                         <div className="space-y-4">
                             <div className="flex items-center gap-3">
-                                <FaBriefcase className=" text-lg text-blue-500 mt-0.5" />
-                                <p className="text-sm text-[#2c4964] font-semibold">With Doctor</p>
+                                <FaBriefcase className="text-[#838080] text-lg mt-0.5" />
+                                <p className="text-sm text-[#2c4964] font-semibold">
+                                    With Dr. {doctor.name || "Doctor"}
+                                </p>
                             </div>
+                            {doctor.specialty && (
+                                <div className="flex items-center gap-3">
+                                    <FaBriefcase className="text-[#838080] text-lg mt-0.5" />
+                                    <p className="text-sm text-[#2c4964] font-semibold">
+                                        {doctor.specialty}
+                                    </p>
+                                </div>
+                            )}
+
                             <div className="flex items-center gap-3">
-                                <FaRegClock className=" text-lg text-blue-500 mt-0.5" />
+                                <FaRegClock className="text-[#838080] text-lg mt-0.5" />
                                 <p className="text-sm text-[#2c4964] font-semibold">30 Min</p>
                             </div>
                             <div className="flex items-start gap-3">
@@ -65,15 +76,15 @@ function SelectApppointment({ selectedDate, handleDateChange, selectTime, setSel
                         </h3>
                         <div className="grid grid-cols-2 gap-3">
                             {next6Days.map((item, index) => (
-                                <div 
-                                    key={index} 
+                                <div
+                                    key={index}
                                     onClick={() => handleDateChange(item)}
                                     className="cursor-pointer"
                                 >
                                     <div className={`p-3 rounded-lg text-center transition-all duration-600 ease-in border-2 
-                                        ${moment(item).format('LL') === moment(selectedDate).format('LL') 
-                                        ? 'bg-[#1977cc] text-white shadow-md' 
-                                        : 'bg-white hover:bg-[#1977cc] border-[#1977cc] text-[#1977cc] hover:text-white'}`}
+                                        ${moment(item).format('LL') === moment(selectedDate).format('LL')
+                                            ? 'bg-[#1977cc] text-white shadow-md'
+                                            : 'bg-white hover:bg-[#1977cc] border-[#1977cc] text-[#1977cc] hover:text-white'}`}
                                     >
                                         <div className="text-sm font-medium">{moment(item).format('MMMM YYYY')}</div>
                                         <div className="text-[22px] font-black py-1.5 my-1">{moment(item).format('D')}</div>
@@ -87,8 +98,8 @@ function SelectApppointment({ selectedDate, handleDateChange, selectTime, setSel
                     {/* Column 3: Time Selection */}
                     <div className="w-full lg:w-1/3 p-4">
                         <h3 className="pb-2 mb-4 border-b border-gray-200 font-medium text-[#2c4964] text-base min-h-[60px]">
-                            {selectTime 
-                                ? `Selected - ${selectTime} to ${moment(selectTime, 'hh:mm A').add(30, 'minutes').format('hh:mm A')}` 
+                            {selectTime
+                                ? `Selected - ${selectTime} to ${moment(selectTime, 'hh:mm A').add(30, 'minutes').format('hh:mm A')}`
                                 : 'Pick a Time'}
                         </h3>
 
@@ -97,8 +108,8 @@ function SelectApppointment({ selectedDate, handleDateChange, selectTime, setSel
                             <h4 className="text-[#2c4964] mb-2 text-base">Morning Time <span className="text-sm text-gray-500">(8AM - 12PM)</span></h4>
                             <div className="grid grid-cols-3 gap-2">
                                 {amTimeSlot.map((item, id) => (
-                                    <Button 
-                                        key={id} 
+                                    <Button
+                                        key={id}
                                         type={item === selectTime ? "primary" : "default"}
                                         size="small"
                                         className="w-full"
@@ -115,8 +126,8 @@ function SelectApppointment({ selectedDate, handleDateChange, selectTime, setSel
                             <h4 className="text-[#2c4964] mb-2 text-base">Afternoon Time <span className="text-sm text-gray-500">(1PM - 5PM)</span></h4>
                             <div className="grid grid-cols-3 gap-2">
                                 {pmTimeSlot.map((item, id) => (
-                                    <Button 
-                                        key={id} 
+                                    <Button
+                                        key={id}
                                         type={item === selectTime ? "primary" : "default"}
                                         size="small"
                                         className="w-full"
@@ -134,4 +145,4 @@ function SelectApppointment({ selectedDate, handleDateChange, selectTime, setSel
     )
 }
 
-export default SelectApppointment
+export default SelectApppointment;

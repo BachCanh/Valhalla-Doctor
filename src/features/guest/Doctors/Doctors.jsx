@@ -16,6 +16,7 @@ function Doctors() {
     error,
   } = useGetDoctorsWithDepartmentId(departmentId);
 
+
   // Calculate pagination values
   const indexOfLastDoctor = currentPage * doctorsPerPage;
   const indexOfFirstDoctor = indexOfLastDoctor - doctorsPerPage;
@@ -30,7 +31,6 @@ function Doctors() {
   const nextPage = () =>
     currentPage < totalPages && setCurrentPage(currentPage + 1);
   const prevPage = () => currentPage > 1 && setCurrentPage(currentPage - 1);
-
   if (isLoading) {
     return <div className="text-center py-10">Loading doctors...</div>;
   }
@@ -93,8 +93,10 @@ function Doctors() {
             {/* Display current page doctors */}
             {currentDoctors.map((doctor) => (
               <DoctorCard
-                key={doctor.id}
+                key={doctor.user_id}
+                id={doctor.user_id}
                 name={doctor.User.fullname}
+                departmentId={doctor.Department.id}
                 department={doctor.Department.name}
                 email={doctor.User.email}
                 phone={doctor.User.phone_number}
