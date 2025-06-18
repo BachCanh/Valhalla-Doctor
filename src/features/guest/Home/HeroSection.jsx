@@ -38,7 +38,7 @@ const HeroSection = () => {
             Get Started
           </Link>
           <Link
-            to="/track-symptoms"
+            to="/appointment"
             className="
               uppercase font-bold text-sm md:text-base px-8 py-3 rounded-full
               bg-white text-[#1977cc] border-2 border-[#1977cc]

@@ -3,6 +3,7 @@ import queryClient from "./config/reactQuery";
 import { BrowserRouter, Route, Routes } from "react-router";
 import { lazy } from "react";
 import GeneralLayout from "./layouts/GeneralLayout";
+import TrackSymtomsPage from "./features/guest/TrackSymtoms/TrackSymtomsPage";
 import AuthProvider from "./context/AuthContext";
 import { ToastContainer } from "react-toastify";
 const HomePageGuest = lazy(() => import("./features/guest/Home/HomePage"));
@@ -21,6 +22,7 @@ function App() {
               <Route index element={<HomePageGuest />} />
               <Route path="/register" element={<Register />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/appointment" element={<TrackSymtomsPage />} />
             </Route>
           </Routes>
 
