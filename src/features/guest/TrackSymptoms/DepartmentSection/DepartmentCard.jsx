@@ -2,11 +2,6 @@ import React from "react";
 import { Link } from "react-router";
 
 function DepartmentCard({ department }) {
-  const handleViewDetails = () => {
-    // Xử lý khi click vào nút xem chi tiết khoa
-    console.log(`Xem chi tiết khoa: ${department.name}`);
-  };
-
   return (
     <div className="bg-white border border-gray-200 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 overflow-hidden w-full">
       <div className="p-8 md:p-10 lg:p-12 flex items-center gap-8 md:gap-10 lg:gap-12">
@@ -18,16 +13,32 @@ function DepartmentCard({ department }) {
           <p className="text-base md:text-lg text-gray-600 mb-3 leading-relaxed">
             {department.description}
           </p>
+
+          {/* Symptoms Section */}
+          {department.Symptoms && department.Symptoms.length > 0 && (
+            <div className="mt-4">
+              <div className="flex flex-wrap gap-2">
+                {department.Symptoms.map((symptom) => (
+                  <span
+                    key={symptom.id}
+                    className="px-3 py-1 text-sm text-gray-600 border border-gray-300 rounded-full bg-gray-50 hover:bg-gray-100 transition-colors duration-200"
+                  >
+                    {symptom.name}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Action Button */}
         <div className="flex-shrink-0 ml-6">
-          <button
-            className="bg-blue-500 hover:bg-blue-600 text-white border-none px-8 py-4 md:px-10 md:py-5 lg:px-12 lg:py-6 rounded-lg text-base md:text-lg font-medium cursor-pointer transition-colors duration-300 whitespace-nowrap active:translate-y-px shadow-sm hover:shadow-md"
-            onClick={handleViewDetails}
+          <Link
+            to={`/appointment/departments/${department.id}/doctors`}
+            className="bg-blue-500 hover:bg-blue-600 text-white border-none px-8 py-4 rounded-lg text-base font-medium cursor-pointer transition-colors duration-300 w-full shadow-sm hover:shadow-md"
           >
             Xem chi tiết
-          </button>
+          </Link>
         </div>
       </div>
 
@@ -51,15 +62,25 @@ function DepartmentCard({ department }) {
           <p className="text-base text-gray-600 mb-3">
             {department.description}
           </p>
-          <p className="text-sm text-gray-500 mb-2">{department.location}</p>
-          {department.doctorCount && (
-            <p className="text-sm text-blue-600 font-medium mb-6">
-              {department.doctorCount} bác sĩ
-            </p>
+
+          {/* Symptoms Section for Mobile */}
+          {department.Symptoms && department.Symptoms.length > 0 && (
+            <div className="mb-4 w-full">
+              <div className="flex flex-wrap gap-2 justify-center">
+                {department.Symptoms.map((symptom) => (
+                  <span
+                    key={symptom.id}
+                    className="px-3 py-1 text-sm text-gray-600 border border-gray-300 rounded-full bg-gray-50"
+                  >
+                    {symptom.name}
+                  </span>
+                ))}
+              </div>
+            </div>
           )}
 
           <Link
-            to={`/appointment/departments`}
+            to={`/appointment/departments/${department.id}/doctors`}
             className="bg-blue-500 hover:bg-blue-600 text-white border-none px-8 py-4 rounded-lg text-base font-medium cursor-pointer transition-colors duration-300 w-full shadow-sm hover:shadow-md"
           >
             Xem chi tiết

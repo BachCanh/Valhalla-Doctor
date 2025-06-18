@@ -24,3 +24,13 @@ export const bookAppointment = async (appointmentData) => {
         throw { message: errMsg };
     }
 }
+
+export const getMyAppointments = async ({ status = "all", page = 1, limit = 10 }) => {
+    const res = await axiosAuth.get(`${API_URL}/appointment/getAllAppointmentsBelonged`, {
+        params: { status, page, limit },
+    });
+
+
+    return res.data; // Nên trả về { data: [...], total, page, ... }
+};
+
