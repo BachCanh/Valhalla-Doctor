@@ -20,6 +20,7 @@ const AppointmentPage = lazy(() =>
 const AppointmentHistory = lazy(() =>
   import("./features/patient/Appointment/AppointmentList")
 );
+const About = lazy(() => import("./features/guest/About/About"));
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Routes>
             <Route element={<GeneralLayout />}>
               <Route index element={<HomePageGuest />} />
+              <Route path="/about" element={<About />} />
               <Route path="/register" element={<Register />} />
               <Route path="/login" element={<Login />} />
               <Route path="/appointment" element={<TrackSymtomsPage />} />
