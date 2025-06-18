@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
 import useFetchDepartmentsBySymptoms from "../../../hooks/useFetchDepartmentsBySymptoms";
-import SubHeader from "./SubHeader";
+import SubHeader from "../../../components/SubHeader";
 import TrackSymtoms from "./TrackSymptomsSection/TrackSymptoms";
 import DepartmentSection from "./DepartmentSection/DepartmentSection";
 

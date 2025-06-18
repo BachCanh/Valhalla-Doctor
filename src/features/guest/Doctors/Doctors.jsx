@@ -2,7 +2,7 @@ import React, { useState, Fragment } from "react";
 import DoctorCard from "./DoctorCard";
 import useGetDoctorsWithDepartmentId from "../../../hooks/useGetDoctorsWithDepartmentId";
 import { useParams } from "react-router-dom";
-import SubHeader from "../TrackSymptoms/SubHeader";
+import SubHeader from "../../../components/SubHeader";
 
 function Doctors() {
   const { departmentId } = useParams();
@@ -15,7 +15,6 @@ function Doctors() {
     isError,
     error,
   } = useGetDoctorsWithDepartmentId(departmentId);
-
 
   // Calculate pagination values
   const indexOfLastDoctor = currentPage * doctorsPerPage;
