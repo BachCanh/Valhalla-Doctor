@@ -32,13 +32,14 @@ function App() {
               <Route path="/appointment" element={<TrackSymtomsPage />} />
               <Route
                 path="/appointment/departments/:departmentId/doctors"
-                element={<Doctors />}/>
+                element={<Doctors />}
+              />
               <Route
                 path="/appointment/departments/:departmentId/doctors/:doctorId"
                 element={<AppointmentPage />}
               />
               <Route
-                path="/appointment-history"
+                path="/customer/appointment-history"
                 element={<AppointmentHistory />}
               />
             </Route>
