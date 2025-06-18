@@ -9,6 +9,7 @@ import DepartmentSection from "./DepartmentSection/DepartmentSection";
 function TrackSymtomsPage() {
   // State để quản lý selected symptoms
   const [selectedSymptoms, setSelectedSymptoms] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
   // Sử dụng hook
   const {
     filterDepartments,
@@ -48,6 +49,7 @@ function TrackSymtomsPage() {
   const handleReset = () => {
     setSelectedSymptoms([]);
     reset();
+    setSearchQuery("");
   };
 
   return (
@@ -63,6 +65,8 @@ function TrackSymtomsPage() {
           onFilter={handleFilterDepartments}
           onReset={handleReset}
           isFilterLoading={isFilterLoading}
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
         />
         <DepartmentSection
           filteredDepartments={filteredDepartments}
