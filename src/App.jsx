@@ -25,8 +25,9 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/appointment" element={<TrackSymtomsPage />} />
               <Route
-              path="/appointment/departments/:departmentId/doctors"
-              element={<Doctors />}
+                path="/appointment/departments/:departmentId/doctors"
+                element={<Doctors />}
+              />
             </Route>
           </Routes>
 
