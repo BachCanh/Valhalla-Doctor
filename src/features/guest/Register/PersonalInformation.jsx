@@ -5,17 +5,19 @@ import { Controller } from "react-hook-form";
 
 export default function PersonalInfoSection({ register, errors, control }) {
   return (
-    <div className="space-y-6">
-      <h2 className="text-lg font-medium text-gray-900 border-l-4 border-blue-500 pl-3">
-        Thông tin cá nhân
-      </h2>
+    <div className="bg-white p-6 rounded-2xl shadow-md space-y-8 border border-gray-100">
+      {/* Section Heading */}
+      <div className="flex items-center space-x-3">
+        <div className="h-6 w-1.5 bg-blue-600 rounded-sm" />
+        <h2 className="text-xl font-semibold text-gray-900">Thông tin cá nhân</h2>
+      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Full Name */}
         <div className="md:col-span-2">
           <label
             htmlFor="customer.fullName"
-            className="block text-sm font-medium text-gray-700 mb-1"
+            className="block text-md font-medium text-gray-800 mb-2"
           >
             Họ và tên
           </label>
@@ -23,13 +25,13 @@ export default function PersonalInfoSection({ register, errors, control }) {
             type="text"
             id="customer.fullName"
             placeholder="Nhập họ và tên"
-            className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-green-500 transition duration-150"
+            className="w-full rounded-xl border border-gray-300 px-4 py-3 text-gray-900 placeholder-gray-400 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-sm transition"
             {...register("customer.fullName", {
               required: "Vui lòng nhập họ và tên",
             })}
           />
           {errors.customer?.fullName && (
-            <p className="mt-1 text-red-500 text-sm">
+            <p className="mt-1 text-sm text-red-500">
               {errors.customer.fullName.message}
             </p>
           )}
@@ -39,7 +41,7 @@ export default function PersonalInfoSection({ register, errors, control }) {
         <div>
           <label
             htmlFor="customer.dateOfBirth"
-            className="block text-sm font-medium text-gray-700 mb-1"
+            className="block text-md font-medium text-gray-800 mb-2"
           >
             Ngày sinh
           </label>
@@ -65,7 +67,7 @@ export default function PersonalInfoSection({ register, errors, control }) {
                 id="customer.dateOfBirth"
                 placeholderText="Chọn ngày sinh"
                 dateFormat="dd/MM/yyyy"
-                className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-green-500 transition duration-150"
+                className="w-full rounded-xl border border-gray-300 px-4 py-3 text-gray-900 placeholder-gray-400 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-sm transition"
                 selected={field.value}
                 onChange={(date) => field.onChange(date)}
                 onBlur={field.onBlur}
@@ -77,7 +79,7 @@ export default function PersonalInfoSection({ register, errors, control }) {
             )}
           />
           {errors.customer?.dateOfBirth && (
-            <p className="mt-1 text-red-500 text-sm">
+            <p className="mt-1 text-sm text-red-500">
               {errors.customer.dateOfBirth.message}
             </p>
           )}
@@ -85,26 +87,26 @@ export default function PersonalInfoSection({ register, errors, control }) {
 
         {/* Gender */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-md font-medium text-gray-800 mb-2">
             Giới tính
           </label>
           <div className="flex items-center gap-6">
-            <label className="inline-flex items-center text-gray-700">
+            <label className="inline-flex items-center text-gray-700 cursor-pointer">
               <input
                 type="radio"
                 value="male"
-                className="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300"
+                className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300"
                 {...register("customer.gender", {
                   required: "Vui lòng chọn giới tính",
                 })}
               />
               <span className="ml-2">Nam</span>
             </label>
-            <label className="inline-flex items-center text-gray-700">
+            <label className="inline-flex items-center text-gray-700 cursor-pointer">
               <input
                 type="radio"
                 value="female"
-                className="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300"
+                className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300"
                 {...register("customer.gender", {
                   required: "Vui lòng chọn giới tính",
                 })}
@@ -113,36 +115,8 @@ export default function PersonalInfoSection({ register, errors, control }) {
             </label>
           </div>
           {errors.customer?.gender && (
-            <p className="mt-1 text-red-500 text-sm">
+            <p className="mt-1 text-sm text-red-500">
               {errors.customer.gender.message}
-            </p>
-          )}
-        </div>
-
-        {/* National ID */}
-        <div>
-          <label
-            htmlFor="customer.nationalID"
-            className="block text-sm font-medium text-gray-700 mb-1"
-          >
-            CCCD/CMND
-          </label>
-          <input
-            type="text"
-            id="customer.nationalID"
-            placeholder="Nhập số CCCD hoặc CMND"
-            className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-green-500 transition duration-150"
-            {...register("customer.nationalID", {
-              required: "Vui lòng nhập CCCD/CMND",
-              pattern: {
-                value: /^\d{9}$|^\d{12}$/,
-                message: "CCCD/CMND phải có 9 hoặc 12 số",
-              },
-            })}
-          />
-          {errors.customer?.nationalID && (
-            <p className="mt-1 text-red-500 text-sm">
-              {errors.customer.nationalID.message}
             </p>
           )}
         </div>
