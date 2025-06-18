@@ -3,7 +3,7 @@ import queryClient from "./config/reactQuery";
 import { BrowserRouter, Route, Routes } from "react-router";
 import { lazy } from "react";
 import GeneralLayout from "./layouts/GeneralLayout";
-import TrackSymtomsPage from "./features/guest/TrackSymtoms/TrackSymtomsPage";
+import TrackSymtomsPage from "./features/guest/TrackSymptoms/TrackSymptomsPage";
 import AuthProvider from "./context/AuthContext";
 import { ToastContainer } from "react-toastify";
 const HomePageGuest = lazy(() => import("./features/guest/Home/HomePage"));
