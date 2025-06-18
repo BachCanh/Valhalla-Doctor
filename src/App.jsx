@@ -6,6 +6,8 @@ import GeneralLayout from "./layouts/GeneralLayout";
 import TrackSymtomsPage from "./features/guest/TrackSymptoms/TrackSymptomsPage";
 import AuthProvider from "./context/AuthContext";
 import { ToastContainer } from "react-toastify";
+import Contact from "./features/guest/Contact/Contact";
+import Blog from "./features/guest/Blog/Blog";
 
 // Lazy-loaded routes
 const HomePageGuest = lazy(() => import("./features/guest/Home/HomePage"));
@@ -34,7 +36,8 @@ function App() {
               <Route path="/appointment" element={<TrackSymtomsPage />} />
               <Route
                 path="/appointment/departments/:departmentId/doctors"
-                element={<Doctors />}/>
+                element={<Doctors />}
+              />
               <Route
                 path="/appointment/departments/:departmentId/doctors/:doctorId"
                 element={<AppointmentPage />}
@@ -43,6 +46,8 @@ function App() {
                 path="/appointment-history"
                 element={<AppointmentHistory />}
               />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/blog" element={<Blog />} />
             </Route>
           </Routes>
 

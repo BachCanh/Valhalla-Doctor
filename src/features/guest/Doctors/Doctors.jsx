@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import DoctorCard from "./DoctorCard";
 import useGetDoctorsWithDepartmentId from "../../../hooks/useGetDoctorsWithDepartmentId";
 import { useParams } from "react-router-dom";
-import SubHeader from "../TrackSymptoms/SubHeader";
+import SubHeader from "../../../components/SubHeader";
 import Pagination from "./Pagination";
+
 
 function Doctors() {
   const { departmentId } = useParams();
