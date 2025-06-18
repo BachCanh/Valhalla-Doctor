@@ -1,4 +1,4 @@
-// FormSections/AccountInfoSection.jsx
+import { isEmailAvailable } from "../../../services/auth.service";
 function AccountInfoSection({ register, errors, watch }) {
   return (
     <div className="bg-white p-6 rounded-2xl shadow-md space-y-8 border border-gray-100">
@@ -30,6 +30,15 @@ function AccountInfoSection({ register, errors, watch }) {
               pattern: {
                 value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
                 message: "Email không hợp lệ",
+              },
+              validate: async (value) => {
+                if (!value) return true; // If the field is empty, return true (no error)
+                try {
+                  await isEmailAvailable(value);
+                  return true;
+                } catch (error) {
+                  return error.message || "Không thể kiểm tra email"; // Default error message if
+                }
               },
             })}
           />

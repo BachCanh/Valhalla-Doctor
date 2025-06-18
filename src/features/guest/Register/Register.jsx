@@ -1,7 +1,5 @@
 import { useForm } from "react-hook-form";
 import AccountInfoSection from "./AccountInformation";
-import { Link } from "react-router-dom";
-import { useState } from "react";
 import ContactInfoSection from "./ContactInformation";
 import PersonalInfoSection from "./PersonalInformation";
 import Header from "./Header";
@@ -10,6 +8,8 @@ import SubmitButton from "./SubmitButton";
 import useSignUp from "../../../hooks/useSignUp";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useAuthContext } from "../../../context/AuthContext";
+import { Navigate } from "react-router";
 
 function SignUp() {
   const {
@@ -21,7 +21,7 @@ function SignUp() {
     reset,
     getValues,
   } = useForm();
-
+  const { isAuthenticated } = useAuthContext();
   const { registerUser, isCreatingUser, isError, error } = useSignUp();
 
   const isAgree = watch("isAgree", false);
@@ -29,11 +29,11 @@ function SignUp() {
   const onSubmit = (data) => {
     // If user hasn't agreed to terms, don't submit
     if (!isAgree) return;
-    console.log("Form data submitted:", data);
-    // Call the registerUser function from our custom hook
     registerUser(data);
   };
-
+  if (isAuthenticated) {
+    return <Navigate to="/" replace />;
+  }
   return (
     <section className="flex flex-col items-center justify-center px-2 mx-4 my-4 sm:mx-4 md:mx-6 md:my-6 sm:px-4 ">
       <ToastContainer />
