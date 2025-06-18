@@ -11,7 +11,8 @@ function Doctors() {
     isError,
     error,
   } = useGetDoctorsWithDepartmentId(departmentId);
-
+  // console.log("Doctors list:", listDoctors);
+  // console.log("[0]", listDoctors[0].user_id);
   if (isLoading) {
     return <div className="text-center py-10">Loading doctors...</div>;
   }
@@ -70,13 +71,16 @@ function Doctors() {
         {listDoctors && listDoctors.length > 0 ? (
           listDoctors.map((doctor) => (
             <DoctorCard
-              key={doctor.id}
+              key={doctor.user_id}
+              id={doctor.user_id}
               name={doctor.User.fullname}
+              departmentId={doctor.Department.id}
               department={doctor.Department.name}
               email={doctor.User.email}
               phone={doctor.User.phone_number}
               bio={doctor.bio}
             />
+            // <h3>{doctor.user_id}</h3>
           ))
         ) : (
           <div className="flex flex-col items-center justify-center py-12 px-4 text-gray-600 bg-gray-50 rounded-lg shadow-sm">
