@@ -6,8 +6,8 @@ const Contact = () => {
   return (
     <>
       <SubHeader
-        title="Contact us"
-        subtitle="Lorem ipsum dolor sit amet consectetur adipisicing."
+        title="Liên hệ"
+        subtitle="Liên hệ với chúng tôi để được tư vấn và hỗ trợ tốt nhất."
       />
 
       <section id="contact" className="mt-5 mb-5">
@@ -26,7 +26,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h4 className="text-xl font-semibold mb-1 text-slate-700">
-                      Location:
+                      Địa điểm:
                     </h4>
                     <p className="text-sm text-blue-700">
                       number 1, Vo Van Ngan, Thu Duc City, HCM City
@@ -56,7 +56,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h4 className="text-xl font-semibold mb-1 text-slate-700">
-                      Call:
+                      Điện thoại:
                     </h4>
                     <p className="text-sm text-blue-700">+88 01751 040425</p>
                   </div>
@@ -72,7 +72,7 @@ const Contact = () => {
                   <div className="md:w-1/2 w-full px-2">
                     <div className="mb-4">
                       <label className="block text-sm font-medium text-gray-700 mb-2">
-                        First Name
+                        Tên
                       </label>
                       <input
                         className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -85,7 +85,7 @@ const Contact = () => {
                   <div className="md:w-1/2 w-full px-2">
                     <div className="mb-4">
                       <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Last Name
+                        Họ
                       </label>
                       <input
                         className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -112,7 +112,7 @@ const Contact = () => {
                   <div className="w-full px-2">
                     <div className="mb-4">
                       <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Subject
+                        Tiêu đề
                       </label>
                       <input
                         className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -125,7 +125,7 @@ const Contact = () => {
                   <div className="w-full px-2">
                     <div className="mb-4">
                       <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Message
+                        Nội dung
                       </label>
                       <textarea
                         className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent mb-3"
@@ -155,7 +155,7 @@ const Contact = () => {
         <div className="max-w-7xl mx-auto px-4">
           <iframe
             className="w-full h-120 border-0 rounded-lg"
-            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.479807172389!2d106.77107767485816!3d10.851064189302297!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752774d7ef06ef%3A0xe1f3dda94d3fde26!2zc-G7kSAxIMSQLiBWw7UgVsSDbiBOZ8OibiwgTGluaCBDaGnhu4N1LCBUaOG7pyDEkOG7qWMsIEjhu5MgQ2jDrSBNaW5oLCBWaeG7h3QgTmFt!5e0!3m2!1svi!2s!4v1750263084102!5m2!1svi!2s"
             frameBorder="0"
             allowFullScreen
             title="Contact Location Map"

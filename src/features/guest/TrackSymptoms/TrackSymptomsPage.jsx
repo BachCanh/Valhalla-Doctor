@@ -55,8 +55,8 @@ function TrackSymtomsPage() {
   return (
     <div className="">
       <SubHeader
-        title="Symptoms"
-        subtitle="Lorem ipsum dolor sit amet consectetur adipisicing."
+        title="Tra cứu triệu chứng"
+        subtitle="Chọn triệu chứng để tìm kiếm chuyên khoa phù hợp."
       />
       <div className="max-w-6xl mx-auto px-8">
         <TrackSymtoms

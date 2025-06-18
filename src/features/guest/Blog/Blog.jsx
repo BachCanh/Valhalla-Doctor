@@ -21,7 +21,7 @@ const Blog = () => {
               <h2 className="uppercase text-2xl font-bold text-slate-700 mb-2">
                 Thành tựu của đội ngũ bác sĩ
               </h2>
-              <p className="text-sm text-gray-600 m-0">
+              <p className="text-md text-gray-600 m-0">
                 Những cống hiến đáng tự hào trong lĩnh vực y tế.
               </p>
             </div>
@@ -61,7 +61,7 @@ const Blog = () => {
               <h2 className="uppercase text-2xl font-bold text-slate-700 mb-2">
                 Giải thưởng và chứng nhận
               </h2>
-              <p className="text-sm text-gray-600 m-0">
+              <p className="text-md text-gray-600 m-0">
                 Những vinh danh từ các tổ chức y tế uy tín.
               </p>
             </div>
@@ -100,7 +100,7 @@ const Blog = () => {
               <h2 className="uppercase text-2xl font-bold text-slate-700 mb-2">
                 Gặp gỡ các chuyên gia của chúng tôi
               </h2>
-              <p className="text-sm text-gray-600 m-0">
+              <p className="text-md text-gray-600 m-0">
                 Đội ngũ bác sĩ chuyên khoa hàng đầu với nhiều năm kinh nghiệm
                 trong lĩnh vực chăm sóc sức khỏe trực tuyến.
               </p>
@@ -133,7 +133,7 @@ const Blog = () => {
               <h2 className="uppercase text-2xl font-bold text-slate-700 mb-2">
                 Bác sĩ nói gì về chúng tôi
               </h2>
-              <p className="text-sm text-gray-600 m-0">
+              <p className="text-md text-gray-600 m-0">
                 Chia sẻ từ những bác sĩ đầu ngành về trải nghiệm làm việc tại
                 bệnh viện trực tuyến của chúng tôi.
               </p>
@@ -147,7 +147,7 @@ const Blog = () => {
                 BS. Nguyễn Văn An
               </span>
             </div>
-            <p className="text-sm text-gray-700 leading-relaxed">
+            <p className="text-md text-gray-700 leading-relaxed">
               Hệ thống bệnh viện trực tuyến này cung cấp nền tảng tuyệt vời để
               tôi có thể tư vấn và chăm sóc bệnh nhân một cách hiệu quả. Công
               nghệ hiện đại, giao diện thân thiện và quy trình chuyên nghiệp
