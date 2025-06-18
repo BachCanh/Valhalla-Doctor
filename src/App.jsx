@@ -21,6 +21,9 @@ const AppointmentHistory = lazy(() =>
   import("./features/patient/Appointment/AppointmentList")
 );
 const About = lazy(() => import("./features/guest/About/About"));
+const DoctorAppointments = lazy(() =>
+  import("./features/doctor/Appointment/AppointmentList")
+);
 
 function App() {
   return (
@@ -48,6 +51,7 @@ function App() {
               />
               <Route path="/contact" element={<Contact />} />
               <Route path="/blog" element={<Blog />} />
+              <Route path="/doctor/appointments" element={<DoctorAppointments />} />
             </Route>
           </Routes>
 
