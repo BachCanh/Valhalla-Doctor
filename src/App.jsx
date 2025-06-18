@@ -12,8 +12,13 @@ const HomePageGuest = lazy(() => import("./features/guest/Home/HomePage"));
 const Register = lazy(() => import("./features/guest/Register/Register"));
 const Login = lazy(() => import("./features/guest/Login/Login"));
 const Doctors = lazy(() => import("./features/guest/Doctors/Doctors"));
-const AppointmentPage = lazy(() => import("./features/guest/Appointment/AppointmentPage"));
-const AppointmentHistory = lazy(() => import("./features/patient/AppointmentList"));
+const AppointmentPage = lazy(() =>
+  import("./features/guest/Appointment/AppointmentPage")
+);
+const AppointmentHistory = lazy(() =>
+  import("./features/patient/AppointmentList")
+);
+const About = lazy(() => import("./features/guest/About/About"));
 
 function App() {
   return (
@@ -23,6 +28,7 @@ function App() {
           <Routes>
             <Route element={<GeneralLayout />}>
               <Route index element={<HomePageGuest />} />
+              <Route path="/about" element={<About />} />
               <Route path="/register" element={<Register />} />
               <Route path="/login" element={<Login />} />
               <Route path="/appointment" element={<TrackSymtomsPage />} />
