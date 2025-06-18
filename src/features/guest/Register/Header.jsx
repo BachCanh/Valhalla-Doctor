@@ -1,14 +1,26 @@
 import { Link } from "react-router";
+import logo from "../../../../public/favicon.png"
 
 function Header() {
   return (
-    <div className="mb-4 text-center md:mb-8">
-      <h1 className="mb-2 text-xl font-bold text-gray-800 sm:text-2xl md:text-3xl">
+    <div className="mb-8 text-center px-4">
+      {/* Logo */}
+      <div className="flex justify-center mb-4">
+        <img
+          src={logo}
+          alt="Valhalla Meds Logo"
+          className="h-12 w-auto sm:h-16"
+        />
+      </div>
+      <h1 className="mb-4 text-3xl font-extrabold text-gray-900 sm:text-3xl md:text-4xl leading-tight tracking-tight">
         Mở tài khoản Valhalla Meds trực tuyến
       </h1>
-      <p className="text-xs text-gray-700 sm:text-sm">
+      <p className="text-base sm:text-lg text-gray-600">
         Nếu đã có tài khoản tại Valhalla Meds, vui lòng{" "}
-        <Link to="/login" className="font-medium text-blue-600 hover:underline">
+        <Link
+          to="/login"
+          className="font-semibold text-blue-600 hover:text-blue-700 hover:underline transition-colors duration-200"
+        >
           đăng nhập
         </Link>
       </p>
