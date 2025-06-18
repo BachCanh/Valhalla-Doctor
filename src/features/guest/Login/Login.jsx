@@ -1,15 +1,16 @@
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import SubmitButton from "./SubmitButton";
 import MovingAnimation from "./MovingAnimation";
 import useAuth from "../../../hooks/useAuth";
+import { useAuthContext } from "../../../context/AuthContext";
 // import { useAuthContext } from "../../../context/AuthContext";
 
 function Login() {
   const { login, loading } = useAuth();
-  // const { isAuthenticated } = useAuthContext();
+  const { isAuthenticated } = useAuthContext();
 
   const {
     register,
@@ -21,11 +22,11 @@ function Login() {
   const togglePassword = () => setShowPassword((prev) => !prev);
 
   const onSubmit = (data) => {
-    login(data); // just use the `data` received from react-hook-form
+    login(data);
   };
-  // if (isAuthenticated) {
-  //   return <Navigate to="/" replace />;
-  // }
+  if (isAuthenticated) {
+    return <Navigate to="/" replace />;
+  }
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-50 -mt-16 px-4">
       <div className="flex flex-col w-full max-w-6xl overflow-hidden bg-white rounded-2xl shadow-lg md:flex-row">
