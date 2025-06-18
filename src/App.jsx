@@ -9,6 +9,7 @@ import { ToastContainer } from "react-toastify";
 const HomePageGuest = lazy(() => import("./features/guest/Home/HomePage"));
 const Register = lazy(() => import("./features/guest/Register/Register"));
 const Login = lazy(() => import("./features/guest/Login/Login"));
+const Doctors = lazy(() => import("./features/guest/Doctors/Doctors"));
 const Appointment = lazy(() =>
   import("./features/guest/Appointment/AppointmentPage")
 );
@@ -23,6 +24,9 @@ function App() {
               <Route path="/register" element={<Register />} />
               <Route path="/login" element={<Login />} />
               <Route path="/appointment" element={<TrackSymtomsPage />} />
+              <Route
+              path="/appointment/departments/:departmentId/doctors"
+              element={<Doctors />}
             </Route>
           </Routes>
 
