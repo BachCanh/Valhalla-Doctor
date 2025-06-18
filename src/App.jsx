@@ -26,7 +26,7 @@ function App() {
               <Route path="/appointment" element={<TrackSymtomsPage />} />
               <Route
               path="/appointment/departments/:departmentId/doctors"
-              element={<Doctors />}
+              element={<Doctors />}/>
             </Route>
           </Routes>
 
