@@ -10,17 +10,17 @@ export default function AccountInfoSection({ register, errors, watch }) {
         {/* Email */}
         <div className="md:col-span-2">
           <label
-            htmlFor="customer.email"
+            htmlFor="patient.email"
             className="block text-sm font-medium text-gray-700 mb-1"
           >
             Email
           </label>
           <input
             type="email"
-            id="customer.email"
+            id="patient.email"
             placeholder="Nhập email của bạn"
             className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-green-500 transition duration-150"
-            {...register("customer.email", {
+            {...register("patient.email", {
               required: "Vui lòng nhập email",
               pattern: {
                 value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
@@ -28,9 +28,9 @@ export default function AccountInfoSection({ register, errors, watch }) {
               },
             })}
           />
-          {errors.customer?.email && (
+          {errors.patient?.email && (
             <p className="mt-1 text-red-500 text-sm">
-              {errors.customer.email.message}
+              {errors.patient.email.message}
             </p>
           )}
         </div>
@@ -38,17 +38,17 @@ export default function AccountInfoSection({ register, errors, watch }) {
         {/* Password */}
         <div>
           <label
-            htmlFor="customer.password"
+            htmlFor="patient.password"
             className="block text-sm font-medium text-gray-700 mb-1"
           >
             Mật khẩu
           </label>
           <input
             type="password"
-            id="customer.password"
+            id="patient.password"
             placeholder="Nhập mật khẩu"
             className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-green-500 transition duration-150"
-            {...register("customer.password", {
+            {...register("patient.password", {
               required: "Vui lòng nhập mật khẩu",
               minLength: {
                 value: 6,
@@ -56,9 +56,9 @@ export default function AccountInfoSection({ register, errors, watch }) {
               },
             })}
           />
-          {errors.customer?.password && (
+          {errors.patient?.password && (
             <p className="mt-1 text-red-500 text-sm">
-              {errors.customer.password.message}
+              {errors.patient.password.message}
             </p>
           )}
         </div>
@@ -66,25 +66,25 @@ export default function AccountInfoSection({ register, errors, watch }) {
         {/* Confirm Password */}
         <div>
           <label
-            htmlFor="customer.confirmPassword"
+            htmlFor="patient.confirmPassword"
             className="block text-sm font-medium text-gray-700 mb-1"
           >
             Xác nhận mật khẩu
           </label>
           <input
             type="password"
-            id="customer.confirmPassword"
+            id="patient.confirmPassword"
             placeholder="Nhập lại mật khẩu"
             className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-green-500 transition duration-150"
-            {...register("customer.confirmPassword", {
+            {...register("patient.confirmPassword", {
               required: "Vui lòng xác nhận mật khẩu",
               validate: (value) =>
-                value === watch("customer.password") || "Mật khẩu không khớp",
+                value === watch("patient.password") || "Mật khẩu không khớp",
             })}
           />
-          {errors.customer?.confirmPassword && (
+          {errors.patient?.confirmPassword && (
             <p className="mt-1 text-red-500 text-sm">
-              {errors.customer.confirmPassword.message}
+              {errors.patient.confirmPassword.message}
             </p>
           )}
         </div>

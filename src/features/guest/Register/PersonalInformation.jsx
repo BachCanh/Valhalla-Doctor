@@ -14,23 +14,23 @@ export default function PersonalInfoSection({ register, errors, control }) {
         {/* Full Name */}
         <div className="md:col-span-2">
           <label
-            htmlFor="customer.fullName"
+            htmlFor="patient.fullName"
             className="block text-sm font-medium text-gray-700 mb-1"
           >
             Họ và tên
           </label>
           <input
             type="text"
-            id="customer.fullName"
+            id="patient.fullName"
             placeholder="Nhập họ và tên"
             className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-green-500 transition duration-150"
-            {...register("customer.fullName", {
+            {...register("patient.fullName", {
               required: "Vui lòng nhập họ và tên",
             })}
           />
-          {errors.customer?.fullName && (
+          {errors.patient?.fullName && (
             <p className="mt-1 text-red-500 text-sm">
-              {errors.customer.fullName.message}
+              {errors.patient.fullName.message}
             </p>
           )}
         </div>
@@ -38,14 +38,14 @@ export default function PersonalInfoSection({ register, errors, control }) {
         {/* Date of Birth */}
         <div>
           <label
-            htmlFor="customer.dateOfBirth"
+            htmlFor="patient.dateOfBirth"
             className="block text-sm font-medium text-gray-700 mb-1"
           >
             Ngày sinh
           </label>
           <Controller
             control={control}
-            name="customer.dateOfBirth"
+            name="patient.dateOfBirth"
             rules={{
               required: "Vui lòng chọn ngày sinh",
               validate: (value) => {
@@ -62,7 +62,7 @@ export default function PersonalInfoSection({ register, errors, control }) {
             }}
             render={({ field }) => (
               <DatePicker
-                id="customer.dateOfBirth"
+                id="patient.dateOfBirth"
                 placeholderText="Chọn ngày sinh"
                 dateFormat="dd/MM/yyyy"
                 className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-green-500 transition duration-150"
@@ -76,9 +76,9 @@ export default function PersonalInfoSection({ register, errors, control }) {
               />
             )}
           />
-          {errors.customer?.dateOfBirth && (
+          {errors.patient?.dateOfBirth && (
             <p className="mt-1 text-red-500 text-sm">
-              {errors.customer.dateOfBirth.message}
+              {errors.patient.dateOfBirth.message}
             </p>
           )}
         </div>
@@ -94,7 +94,7 @@ export default function PersonalInfoSection({ register, errors, control }) {
                 type="radio"
                 value="male"
                 className="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300"
-                {...register("customer.gender", {
+                {...register("patient.gender", {
                   required: "Vui lòng chọn giới tính",
                 })}
               />
@@ -105,16 +105,16 @@ export default function PersonalInfoSection({ register, errors, control }) {
                 type="radio"
                 value="female"
                 className="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300"
-                {...register("customer.gender", {
+                {...register("patient.gender", {
                   required: "Vui lòng chọn giới tính",
                 })}
               />
               <span className="ml-2">Nữ</span>
             </label>
           </div>
-          {errors.customer?.gender && (
+          {errors.patient?.gender && (
             <p className="mt-1 text-red-500 text-sm">
-              {errors.customer.gender.message}
+              {errors.patient.gender.message}
             </p>
           )}
         </div>
@@ -122,17 +122,17 @@ export default function PersonalInfoSection({ register, errors, control }) {
         {/* National ID */}
         <div>
           <label
-            htmlFor="customer.nationalID"
+            htmlFor="patient.nationalID"
             className="block text-sm font-medium text-gray-700 mb-1"
           >
             CCCD/CMND
           </label>
           <input
             type="text"
-            id="customer.nationalID"
+            id="patient.nationalID"
             placeholder="Nhập số CCCD hoặc CMND"
             className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-green-500 transition duration-150"
-            {...register("customer.nationalID", {
+            {...register("patient.nationalID", {
               required: "Vui lòng nhập CCCD/CMND",
               pattern: {
                 value: /^\d{9}$|^\d{12}$/,
@@ -140,9 +140,9 @@ export default function PersonalInfoSection({ register, errors, control }) {
               },
             })}
           />
-          {errors.customer?.nationalID && (
+          {errors.patient?.nationalID && (
             <p className="mt-1 text-red-500 text-sm">
-              {errors.customer.nationalID.message}
+              {errors.patient.nationalID.message}
             </p>
           )}
         </div>
