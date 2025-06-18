@@ -56,3 +56,14 @@ export const validateJWT = async () => {
     throw { message: errMsg };
   }
 };
+export const isEmailAvailable = async (email) => {
+  try {
+    const response = await axios.post(`${API_URL}/auth/isEmailAvailable`, {
+      email, // sent in the request body
+    });
+    return response.data;
+  } catch (error) {
+    const errMsg = error.response?.data?.message || "Không thể kiểm tra email";
+    throw { message: errMsg };
+  }
+};
