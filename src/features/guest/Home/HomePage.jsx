@@ -1,9 +1,13 @@
 import HeroSection from "./HeroSection";
+import InfoPage from "./InfoPage";
+import Service from "./Service";
 
 function HomePage() {
   return (
     <div className="">
-      <HeroSection />;
+      <HeroSection />
+      <InfoPage />
+      <Service />
     </div>
   );
 }
