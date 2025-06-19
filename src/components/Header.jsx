@@ -9,9 +9,9 @@ import useAuth from "../hooks/useAuth"; // <-- Correct import
 
 const Header = () => {
   const dummyUser = {
-    firstName: "John",
-    lastName: "Doe",
-    email: "john.doe@example.com",
+    firstName: "",
+    lastName: "",
+    email: "",
     img: null,
   };
   const { isAuthenticated } = useAuthContext();
@@ -30,7 +30,7 @@ const Header = () => {
           to="/customer/appointment-history"
           className="text-blue-600 hover:underline text-sm block mt-1"
         >
-          Go to Dashboard
+          Đi đến Dashboard
         </Link>
       </div>
       <button
@@ -38,7 +38,7 @@ const Header = () => {
         onClick={() => logout()} // Call the logout function
         disabled={loading} // Disable button while loading
       >
-        {loading ? "Đang đăng xuất..." : "Log Out"}
+        {loading ? "Đang đăng xuất..." : "Đăng xuất"}
       </button>
     </div>
   );

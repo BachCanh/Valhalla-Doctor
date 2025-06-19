@@ -59,7 +59,7 @@ const Service = () => {
               sóc tốt nhất cho sức khỏe của bạn.
             </p>
             <Link
-              to={"/service"}
+              to={"/appointment"}
               className="inline-block font-['Raleway',sans-serif] uppercase font-medium text-sm tracking-wider px-9 py-3 rounded-full transition-all duration-500 text-white bg-[#1977cc] hover:bg-[#3291e6] no-underline"
             >
               Dịch Vụ

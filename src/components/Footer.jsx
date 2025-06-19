@@ -29,9 +29,9 @@ const Footer = () => {
                 </div>
                 <div>
                   <p className="text-white text-sm leading-relaxed max-w-[200px] mb-0">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua.
+                    Bệnh viện chúng tôi luôn cam kết mang đến dịch vụ y tế chất
+                    lượng cao, đội ngũ bác sĩ giàu kinh nghiệm và trang thiết bị
+                    hiện đại nhằm chăm sóc sức khỏe toàn diện cho cộng đồng.
                   </p>
                 </div>
               </div>
@@ -41,34 +41,35 @@ const Footer = () => {
             <div className="col-span-1">
               <div className="footer-widget">
                 <h2 className="text-white text-xl font-bold mb-8 capitalize">
-                  For Patients
+                  Bệnh nhân
                 </h2>
                 <ul className="list-none m-0 p-0 space-y-2.5">
-                  <li>
-                    <Link
-                      to={"/appointment"}
-                      className="text-white text-[15px] no-underline transition-all duration-400 ease-in-out hover:text-white hover:tracking-wider hover:pl-2.5 flex items-center"
-                    >
-                      <FaAngleDoubleRight className="mr-1.5 text-sm" />
-                      Search for symptoms
-                    </Link>
-                  </li>
                   <li>
                     <Link
                       to={"/login"}
                       className="text-white text-[15px] no-underline transition-all duration-400 ease-in-out hover:text-white hover:tracking-wider hover:pl-2.5 flex items-center"
                     >
                       <FaAngleDoubleRight className="mr-1.5 text-sm" />
-                      Login
+                      Đăng nhập
                     </Link>
                   </li>
+
                   <li>
                     <Link
                       to={"/register"}
                       className="text-white text-[15px] no-underline transition-all duration-400 ease-in-out hover:text-white hover:tracking-wider hover:pl-2.5 flex items-center"
                     >
                       <FaAngleDoubleRight className="mr-1.5 text-sm" />
-                      Register
+                      Đăng ký
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to={"/appointment"}
+                      className="text-white text-[15px] no-underline transition-all duration-400 ease-in-out hover:text-white hover:tracking-wider hover:pl-2.5 flex items-center"
+                    >
+                      <FaAngleDoubleRight className="mr-1.5 text-sm" />
+                      Tìm kiếm khoa
                     </Link>
                   </li>
                 </ul>
@@ -79,18 +80,9 @@ const Footer = () => {
             <div className="col-span-1">
               <div className="footer-widget">
                 <h2 className="text-white text-xl font-bold mb-8 capitalize">
-                  For Doctors
+                  Bác sĩ
                 </h2>
                 <ul className="list-none m-0 p-0 space-y-2.5">
-                  <li>
-                    <Link
-                      to={"/"}
-                      className="text-white text-[15px] no-underline transition-all duration-400 ease-in-out hover:text-white hover:tracking-wider hover:pl-2.5 flex items-center"
-                    >
-                      <FaAngleDoubleRight className="mr-1.5 text-sm" />
-                      Appointments
-                    </Link>
-                  </li>
                   <li>
                     <Link
                       to={"/login"}
@@ -126,7 +118,7 @@ const Footer = () => {
             <div className="col-span-1">
               <div className="footer-widget">
                 <h2 className="text-white text-xl font-bold mb-8 capitalize mt-3 md:mt-0">
-                  Contact Us
+                  Liên hệ
                 </h2>
                 <div className="text-white text-[15px]">
                   <div className="flex mb-4">
@@ -134,7 +126,7 @@ const Footer = () => {
                       <i className="fas fa-map-marker-alt text-xl"></i>
                     </span>
                     <p className="mb-0">
-                      Number 1, Vo Van Ngan, Thu Duc
+                      số 1, Võ Văn Ngân, Thủ Đức
                       <br />
                       Ho Chi Minh City, Vietnam
                     </p>
