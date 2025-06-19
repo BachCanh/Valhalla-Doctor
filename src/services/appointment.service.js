@@ -44,7 +44,10 @@ export const getMyAppointments = async ({
 
 export const cancelAppointment = async (appointmentId) => {
   try {
-    const response = await axiosAuth.post(`${API_URL}/appointment/cancelAppointment`, appointmentId);
+    const response = await axiosAuth.post(
+      `${API_URL}/appointment/cancelAppointment`,
+      { appointmentId }
+    );
     return response.data;
   } catch (error) {
     console.error("Cancellation error details:", {
@@ -62,4 +65,4 @@ export const cancelAppointment = async (appointmentId) => {
 
     throw { message: errMsg };
   }
-}
+};
