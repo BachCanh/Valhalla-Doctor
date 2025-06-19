@@ -6,8 +6,9 @@ import {
   FaSignOutAlt,
   FaKey,
 } from "react-icons/fa";
-
+import useAuth from "../../hooks/useAuth";
 function PatientLayout() {
+  const { logout, loading } = useAuth();
   return (
     <div className="flex min-h-screen bg-gray-50">
       {/* Sidebar */}
@@ -110,15 +111,16 @@ function PatientLayout() {
         <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-blue-700/30 bg-blue-900/50">
           <button
             onClick={() => {
-              // TODO: Add logout logic
-              console.log("Logout");
+              logout();
             }}
             className="w-full flex items-center gap-4 px-4 py-3 rounded-xl text-red-300 hover:bg-red-600/20 hover:text-red-200 transition-all duration-200 group"
           >
             <div className="w-8 h-8 flex items-center justify-center">
               <FaSignOutAlt className="text-lg group-hover:scale-110 transition-transform" />
             </div>
-            <span className="font-medium">Đăng xuất</span>
+            <span className="font-medium">
+              {loading ? "Đang Đăng Xuất" : "Đăng xuất"}t
+            </span>
           </button>
         </div>
       </aside>
