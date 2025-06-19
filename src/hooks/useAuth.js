@@ -19,7 +19,7 @@ export default function useAuth() {
       toast.success("Đăng nhập thành công");
       data.role === "patient"
         ? navigate("/customer/appointment-history")
-        : navigate("/");
+        : navigate("/doctor/appointments");
     },
     onError: (error) => {
       const msg = error?.message || "Login failed";
