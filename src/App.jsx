@@ -3,6 +3,8 @@ import queryClient from "./config/reactQuery";
 import { BrowserRouter, Route, Routes } from "react-router";
 import { lazy } from "react";
 import GeneralLayout from "./layouts/GeneralLayout";
+import PatientLayout from "./layouts/PatientLayout/PatientLayout";
+
 import TrackSymtomsPage from "./features/guest/TrackSymptoms/TrackSymptomsPage";
 import AuthProvider from "./context/AuthContext";
 import { ToastContainer } from "react-toastify";
@@ -42,12 +44,16 @@ function App() {
                 path="/appointment/departments/:departmentId/doctors/:doctorId"
                 element={<AppointmentPage />}
               />
+
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/blog" element={<Blog />} />
+            </Route>
+            <Route element={<PatientLayout />}>
               <Route
+                index
                 path="/customer/appointment-history"
                 element={<AppointmentHistory />}
               />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/blog" element={<Blog />} />
             </Route>
           </Routes>
 
