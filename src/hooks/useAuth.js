@@ -14,10 +14,12 @@ export default function useAuth() {
     onMutate: () => {
       dispatch({ type: "LOGIN_REQUEST" });
     },
-    onSuccess: () => {
+    onSuccess: (data) => {
       dispatch({ type: "LOGIN_SUCCESS" });
       toast.success("Đăng nhập thành công");
-      navigate("/");
+      data.role === "patient"
+        ? navigate("/customer/appointment-history")
+        : navigate("/");
     },
     onError: (error) => {
       const msg = error?.message || "Login failed";

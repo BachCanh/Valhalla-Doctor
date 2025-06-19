@@ -43,3 +43,82 @@
     background-color: #1977cc;
     color: white !important;
 }
+
+/* Premium Calendar styling */
+.appointment-calendar .ant-picker-cell-in-view.ant-picker-cell-selected .ant-picker-cell-inner {
+  background-color: #1977cc !important;
+}
+
+.appointment-calendar .ant-picker-cell-in-view.ant-picker-cell-today .ant-picker-cell-inner::before {
+  border-color: #1977cc !important;
+}
+
+.appointment-calendar .ant-badge-status-success {
+  color: #52c41a;
+}
+
+.appointment-calendar .ant-badge-status-warning {
+  color: #faad14;
+}
+
+.appointment-calendar .ant-badge-status-error {
+  color: #f5222d;
+}
+
+.appointment-calendar .ant-badge-status-default {
+  color: #d9d9d9;
+}
+
+/* Animation for success message */
+@keyframes success-pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.success-animation {
+  animation: success-pulse 2s infinite;
+}
+
+/* Button hover effects */
+.time-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+
+/* Premium doctor card */
+.doctor-card {
+  transition: all 0.3s ease;
+}
+
+.doctor-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(25, 119, 204, 0.1);
+}
+
+/* Zoom preview animation */
+.zoom-preview-enter {
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+.zoom-preview-enter-active {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.zoom-preview-exit {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.zoom-preview-exit-active {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 300ms, transform 300ms;
+}

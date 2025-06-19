@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
 import { validateJWT } from "../services/auth.service";
-// import Spinner from "../components/Spinner";
+import Spinner from "../components/Spinner";
 
 // Initial state - focused only on authentication status
 const initialState = {
@@ -82,9 +82,9 @@ const AuthProvider = ({ children = null }) => {
     checkSession();
   }, []);
 
-  // if (state.loading) {
-  //   return <Spinner />;
-  // }
+  if (state.loading) {
+    return <Spinner />;
+  }
 
   return (
     <AuthContext.Provider value={{ ...state, dispatch }}>

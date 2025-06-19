@@ -25,6 +25,30 @@ const doctorService = {
       throw { message: errMsg };
     }
   },
+  getDoctorBusyDates: async (doctorId) => {
+    try {
+      const response = await axios.get(
+        `${API_URL}/doctor/busyDates/${doctorId}`
+      );
+      console.log("Doctor busy dates response:", response.data);
+      return response.data;
+    } catch (error) {
+      console.error("Fetching busy dates error details:", {
+        message: error.message,
+        status: error.response?.status,
+        responseData: error.response?.data,
+        stack: error.stack,
+      });
+
+      const errMsg =
+        error.response?.data?.message ||
+        error.response?.data?.error ||
+        error.message ||
+        "Không thể lấy lịch làm việc của bác sĩ";
+
+      throw { message: errMsg };
+    }
+  },
 };
 
 export default doctorService;
