@@ -1,21 +1,26 @@
 import { useState } from "react";
 import AppointmentCard from "./AppointmentCard";
+import AppointmentModal from "./AppointmentModal";
 import useMyAppointments from "../../../hooks/useGetUserAppointments";
 import { useAuthContext } from "../../../context/AuthContext";
 import { Navigate } from "react-router";
 import FlexibleSpinner from "../../../components/FlexibleSpinner";
-
+import useCancelAppointment from "../../../hooks/useCancelAppointment";
 function MyAppointments() {
   const [status, setStatus] = useState("all");
   const [page, setPage] = useState(1);
+  const [selectedAppointment, setSelectedAppointment] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { cancelAppointment } = useCancelAppointment();
   const limit = 8;
   const { isAuthenticated, loading } = useAuthContext();
 
   const {
     data,
-    isFetching, // 👈 Add this line
+    isFetching,
     isError,
     error,
+    refetch, // Add refetch to reload data after cancellation
   } = useMyAppointments({ status, page, limit });
 
   if (!isAuthenticated && !loading) {
@@ -25,6 +30,20 @@ function MyAppointments() {
   const appointments = data?.appointments || [];
   const total = data?.total || 0;
   const totalPages = Math.ceil(total / limit);
+
+  const handleCardClick = (appointment) => {
+    setSelectedAppointment(appointment);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedAppointment(null);
+  };
+
+  const handleCancelAppointment = (appointmentId) => {
+    cancelAppointment(appointmentId)
+  };
 
   const getStatusConfig = (type) => {
     const configs = {
@@ -94,11 +113,10 @@ function MyAppointments() {
                 return (
                   <button
                     key={type}
-                    className={`relative px-8 py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 ${
-                      isActive
+                    className={`relative px-8 py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 ${isActive
                         ? `${config.gradient} text-white shadow-lg shadow-blue-500/25`
                         : "text-gray-700 hover:bg-gray-100/80 hover:shadow-md"
-                    }`}
+                      }`}
                     onClick={() => {
                       setStatus(type);
                       setPage(1);
@@ -139,7 +157,7 @@ function MyAppointments() {
         )}
 
         <div className="relative">
-          {isFetching ? ( // ✅ Use isFetching instead of isLoading
+          {isFetching ? (
             <div className="flex flex-col items-center justify-center py-20">
               <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-12 shadow-2xl border border-white/20">
                 <FlexibleSpinner />
@@ -176,11 +194,12 @@ function MyAppointments() {
               {appointments.map((appointment, index) => (
                 <div
                   key={appointment.id}
-                  className="transform hover:scale-105 transition-all duration-300 animate-fade-in-up"
+                  className="transform hover:scale-105 transition-all duration-300 animate-fade-in-up cursor-pointer"
                   style={{
                     animationDelay: `${index * 100}ms`,
                     animationFillMode: "both",
                   }}
+                  onClick={() => handleCardClick(appointment)}
                 >
                   <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-white/20 overflow-hidden">
                     <AppointmentCard appointment={appointment} />
@@ -218,11 +237,10 @@ function MyAppointments() {
                     return (
                       <button
                         key={pageNum}
-                        className={`w-12 h-12 rounded-xl font-bold transition-all duration-300 transform hover:scale-110 ${
-                          page === pageNum
+                        className={`w-12 h-12 rounded-xl font-bold transition-all duration-300 transform hover:scale-110 ${page === pageNum
                             ? "bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-lg shadow-blue-500/30"
                             : "bg-gray-100 text-gray-700 hover:bg-gray-200 shadow-md"
-                        }`}
+                          }`}
                         onClick={() => setPage(pageNum)}
                       >
                         {pageNum}
@@ -246,6 +264,14 @@ function MyAppointments() {
           </div>
         )}
       </div>
+
+      {/* Appointment Modal */}
+      <AppointmentModal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        appointment={selectedAppointment}
+        onCancel={handleCancelAppointment}
+      />
     </div>
   );
 }
