@@ -107,7 +107,7 @@ export default function PersonalInfoSection({ register, errors, control }) {
             <label className="inline-flex items-center text-gray-700 cursor-pointer">
               <input
                 type="radio"
-                value="female"
+                value="fem"
                 className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300"
                 {...register("patient.gender", {
                   required: "Vui lòng chọn giới tính",

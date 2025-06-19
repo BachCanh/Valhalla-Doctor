@@ -1,9 +1,12 @@
 import HeaderNav from "./HeaderNav";
 import avatar from "../../public/favicon.png";
 import { useAuthContext } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 import Logo from "../components/Logo";
 import { useState } from "react";
 import { Link } from "react-router";
+import useAuth from "../hooks/useAuth"; // <-- Correct import
+
 const Header = () => {
   const dummyUser = {
     firstName: "John",
@@ -11,8 +14,13 @@ const Header = () => {
     email: "john.doe@example.com",
     img: null,
   };
-  const { isAuthenticated, loading } = useAuthContext();
+  const { isAuthenticated } = useAuthContext();
   const [open, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+
+  // Call the useAuth hook and destructure its returned values
+  const { logout, loading } = useAuth();
+
   const content = (
     <div className="p-4 text-sm text-gray-700">
       <div className="mb-3">
@@ -25,8 +33,12 @@ const Header = () => {
           Go to Dashboard
         </Link>
       </div>
-      <button className="w-full text-red-600 text-sm font-medium hover:underline">
-        Log Out
+      <button
+        className="w-full text-red-600 text-sm font-medium hover:underline"
+        onClick={() => logout()} // Call the logout function
+        disabled={loading} // Disable button while loading
+      >
+        {loading ? "Đang đăng xuất..." : "Log Out"}
       </button>
     </div>
   );

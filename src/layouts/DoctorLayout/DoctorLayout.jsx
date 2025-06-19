@@ -2,26 +2,27 @@ import { Outlet, NavLink } from "react-router-dom";
 import {
   FaHome,
   FaCalendarAlt,
-  FaUser,
+  FaUserMd,
   FaSignOutAlt,
   FaKey,
+  FaUser,
 } from "react-icons/fa";
 import useAuth from "../../hooks/useAuth";
-function PatientLayout() {
+function DoctorLayout() {
   const { logout, loading } = useAuth();
   return (
     <div className="flex min-h-screen bg-gray-50">
       {/* Sidebar */}
-      <aside className="w-72 bg-gradient-to-b from-blue-900 via-blue-800 to-blue-900 shadow-2xl fixed top-0 left-0 bottom-0 pt-6 overflow-y-auto">
+      <aside className="w-72 bg-gradient-to-b from-indigo-900 via-indigo-800 to-indigo-900 shadow-2xl fixed top-0 left-0 bottom-0 pt-6 overflow-y-auto">
         {/* Header */}
-        <div className="px-6 pb-8 border-b border-blue-700/30">
+        <div className="px-6 pb-8 border-b border-indigo-700/30">
           <div className="flex items-center gap-3 mb-2">
-            <div className="w-10 h-10 bg-blue-400 rounded-xl flex items-center justify-center">
-              <FaUser className="text-white text-lg" />
+            <div className="w-10 h-10 bg-indigo-400 rounded-xl flex items-center justify-center">
+              <FaUserMd className="text-white text-lg" />
             </div>
             <div>
-              <h2 className="text-white font-semibold text-lg">Bệnh nhân</h2>
-              <p className="text-blue-200 text-sm">Hệ thống quản lý</p>
+              <h2 className="text-white font-semibold text-lg">Bác sĩ</h2>
+              <p className="text-indigo-200 text-sm">Hệ thống quản lý</p>
             </div>
           </div>
         </div>
@@ -35,8 +36,8 @@ function PatientLayout() {
               className={({ isActive }) =>
                 `flex items-center gap-4 px-4 py-3 rounded-xl transition-all duration-200 group ${
                   isActive
-                    ? "bg-blue-600 text-white shadow-lg"
-                    : "text-blue-100 hover:bg-blue-700/50 hover:text-white"
+                    ? "bg-indigo-600 text-white shadow-lg"
+                    : "text-indigo-100 hover:bg-indigo-700/50 hover:text-white"
                 }`
               }
             >
@@ -47,12 +48,12 @@ function PatientLayout() {
             </NavLink>
 
             <NavLink
-              to="/customer/appointment-history"
+              to="/doctor/appointments"
               className={({ isActive }) =>
                 `flex items-center gap-4 px-4 py-3 rounded-xl transition-all duration-200 group ${
                   isActive
-                    ? "bg-blue-600 text-white shadow-lg"
-                    : "text-blue-100 hover:bg-blue-700/50 hover:text-white"
+                    ? "bg-indigo-600 text-white shadow-lg"
+                    : "text-indigo-100 hover:bg-indigo-700/50 hover:text-white"
                 }`
               }
             >
@@ -64,21 +65,21 @@ function PatientLayout() {
           </div>
 
           {/* Personal Information Section */}
-          <div className="border-t border-blue-700/30 pt-6">
+          <div className="border-t border-indigo-700/30 pt-6">
             <div className="px-4 mb-4">
-              <h3 className="text-blue-200 font-semibold text-sm uppercase tracking-wider">
+              <h3 className="text-indigo-200 font-semibold text-sm uppercase tracking-wider">
                 Thông tin cá nhân
               </h3>
             </div>
 
             <div className="space-y-2">
               <NavLink
-                to="/customer/profile"
+                to="/doctor/profile"
                 className={({ isActive }) =>
                   `flex items-center gap-4 px-4 py-3 rounded-xl transition-all duration-200 group ${
                     isActive
-                      ? "bg-blue-600 text-white shadow-lg"
-                      : "text-blue-100 hover:bg-blue-700/50 hover:text-white"
+                      ? "bg-indigo-600 text-white shadow-lg"
+                      : "text-indigo-100 hover:bg-indigo-700/50 hover:text-white"
                   }`
                 }
               >
@@ -89,12 +90,12 @@ function PatientLayout() {
               </NavLink>
 
               <NavLink
-                to="/customer/change-password"
+                to="/doctor/change-password"
                 className={({ isActive }) =>
                   `flex items-center gap-4 px-4 py-3 rounded-xl transition-all duration-200 group ${
                     isActive
-                      ? "bg-blue-600 text-white shadow-lg"
-                      : "text-blue-100 hover:bg-blue-700/50 hover:text-white"
+                      ? "bg-indigo-600 text-white shadow-lg"
+                      : "text-indigo-100 hover:bg-indigo-700/50 hover:text-white"
                   }`
                 }
               >
@@ -135,4 +136,4 @@ function PatientLayout() {
   );
 }
 
-export default PatientLayout;
+export default DoctorLayout;

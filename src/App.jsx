@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router";
 import { lazy } from "react";
 import GeneralLayout from "./layouts/GeneralLayout";
 import PatientLayout from "./layouts/PatientLayout/PatientLayout";
+import DoctorLayout from "./layouts/DoctorLayout/DoctorLayout";
 
 import TrackSymtomsPage from "./features/guest/TrackSymptoms/TrackSymptomsPage";
 import AuthProvider from "./context/AuthContext";
@@ -23,7 +24,13 @@ const AppointmentPage = lazy(() =>
 const AppointmentHistory = lazy(() =>
   import("./features/patient/Appointment/AppointmentList")
 );
+const ChangePassword = lazy(() =>
+  import("./features/patient/ChangePassword/ChangePassword")
+);
 const About = lazy(() => import("./features/guest/About/About"));
+const DoctorAppointments = lazy(() =>
+  import("./features/doctor/Appointment/AppointmentList")
+);
 
 function App() {
   return (
@@ -48,6 +55,8 @@ function App() {
 
               <Route path="/contact" element={<Contact />} />
               <Route path="/blog" element={<Blog />} />
+              <Route path="/doctor/appointments" element={<DoctorAppointments />} />
+
             </Route>
             <Route element={<PatientLayout />}>
               <Route
@@ -56,6 +65,18 @@ function App() {
                 element={<AppointmentHistory />}
               />
               <Route index path="/customer/profile" element={<Profile />} />
+              <Route
+                index
+                path="/customer/change-password"
+                element={<ChangePassword />}
+              />
+            </Route>
+            <Route element={<DoctorLayout />}>
+              <Route
+                index
+                path="/doctor/appointments"
+                element={<DoctorAppointments />}
+              />
             </Route>
           </Routes>
 

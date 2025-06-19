@@ -67,3 +67,27 @@ export const isEmailAvailable = async (email) => {
     throw { message: errMsg };
   }
 };
+export const changePassword = async (passwordData) => {
+  try {
+    const { currentPassword, newPassword } = passwordData;
+    const response = await axiosAuth.post(
+      `${API_URL}/auth/changePassword`,
+      {
+        currentPassword,
+        newPassword,
+      },
+      {
+        withCredentials: true,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    const errMsg =
+      error.response?.data?.message ||
+      error.response?.data?.error ||
+      error.message ||
+      "Không thể thay đổi mật khẩu";
+
+    throw { message: errMsg };
+  }
+};
