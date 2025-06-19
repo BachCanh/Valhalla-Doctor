@@ -23,6 +23,9 @@ const AppointmentPage = lazy(() =>
 const AppointmentHistory = lazy(() =>
   import("./features/patient/Appointment/AppointmentList")
 );
+const ChangePassword = lazy(() =>
+  import("./features/patient/ChangePassword/ChangePassword")
+);
 const About = lazy(() => import("./features/guest/About/About"));
 const DoctorAppointments = lazy(() =>
   import("./features/doctor/Appointment/AppointmentList")
@@ -59,6 +62,11 @@ function App() {
                 index
                 path="/customer/appointment-history"
                 element={<AppointmentHistory />}
+              />
+              <Route
+                index
+                path="/customer/change-password"
+                element={<ChangePassword />}
               />
             </Route>
             <Route element={<DoctorLayout />}>
