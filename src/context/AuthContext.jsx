@@ -7,6 +7,7 @@ const initialState = {
   isAuthenticated: false,
   loading: true,
   error: null,
+  role: null,
 };
 
 // Simplified auth reducer
@@ -53,6 +54,7 @@ const authReducer = (state, action) => {
         isAuthenticated: false,
         loading: false,
         error: null,
+        role: null,
       };
 
     default:
@@ -70,8 +72,14 @@ const AuthProvider = ({ children = null }) => {
     const checkSession = async () => {
       dispatch({ type: "SESSION_VALIDATE_REQUEST" });
       try {
-        await validateJWT();
-        dispatch({ type: "SESSION_VALIDATE_SUCCESS" });
+        const data = await validateJWT();
+
+        dispatch({
+          type: "SESSION_VALIDATE_SUCCESS",
+          payload: {
+            role: data.role,
+          },
+        });
       } catch (err) {
         dispatch({
           type: "SESSION_VALIDATE_FAILURE",

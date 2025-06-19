@@ -15,8 +15,11 @@ export default function useAuth() {
       dispatch({ type: "LOGIN_REQUEST" });
     },
     onSuccess: (data) => {
-      dispatch({ type: "LOGIN_SUCCESS" });
+      dispatch({
+        type: "LOGIN_SUCCESS",
+      });
       toast.success("Đăng nhập thành công");
+
       data.role === "patient"
         ? navigate("/customer/appointment-history")
         : navigate("/doctor/appointments");

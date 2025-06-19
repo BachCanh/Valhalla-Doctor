@@ -1,12 +1,11 @@
 import HeaderNav from "./HeaderNav";
 import avatar from "../../public/favicon.png";
-import { useAuthContext } from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
 import Logo from "../components/Logo";
 import { useState } from "react";
 import { Link } from "react-router";
 import useAuth from "../hooks/useAuth"; // <-- Correct import
-
+import { useAuthContext } from "../context/AuthContext";
+import { useGetRole } from "../hooks/useGetRole";
 const Header = () => {
   const dummyUser = {
     firstName: "",
@@ -16,18 +15,21 @@ const Header = () => {
   };
   const { isAuthenticated } = useAuthContext();
   const [open, setIsOpen] = useState(false);
-  const navigate = useNavigate();
-
   // Call the useAuth hook and destructure its returned values
   const { logout, loading } = useAuth();
-
+  const { data: role, isLoading: roleLoading } = useGetRole();
+  console.log("Role:", role);
   const content = (
     <div className="p-4 text-sm text-gray-700">
       <div className="mb-3">
         <h5 className="font-semibold capitalize">{`${dummyUser.firstName} ${dummyUser.lastName}`}</h5>
         <p className="text-xs text-gray-500">{dummyUser.email}</p>
         <Link
-          to="/customer/appointment-history"
+          to={
+            role === "patient"
+              ? "/customer/appointment-history"
+              : "/doctor/appointments"
+          }
           className="text-blue-600 hover:underline text-sm block mt-1"
         >
           Đi đến Dashboard

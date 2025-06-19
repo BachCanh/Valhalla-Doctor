@@ -67,6 +67,15 @@ export const isEmailAvailable = async (email) => {
     throw { message: errMsg };
   }
 };
+export const getRole = async () => {
+  try {
+    const response = await axiosAuth.get(`${API_URL}/auth/getRole`);
+    return response.data;
+  } catch (error) {
+    const errMsg = error.response?.data?.message || "Không thể lấy vai trò";
+    throw { message: errMsg };
+  }
+};
 export const changePassword = async (passwordData) => {
   try {
     const { currentPassword, newPassword } = passwordData;
