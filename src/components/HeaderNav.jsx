@@ -37,10 +37,10 @@ const HeaderNav = ({ open, setOpen, isLoggedIn, data, avatar, content }) => {
   }, []);
 
   const navItems = [
-    { to: "/", label: "Home", icon: <FaHome /> },
-    { to: "/about", label: "About", icon: <FaAddressBook /> },
-    { to: "/appointment", label: "Service", icon: <FaWrench /> },
-    { to: "/contact", label: "Contact", icon: <FaPhoneAlt /> },
+    { to: "/", label: "Trang chủ", icon: <FaHome /> },
+    { to: "/about", label: "Về chúng tôi", icon: <FaAddressBook /> },
+    { to: "/appointment", label: "Dịch vụ", icon: <FaWrench /> },
+    { to: "/contact", label: "Liên lạc", icon: <FaPhoneAlt /> },
     { to: "/blog", label: "Blog", icon: <FaBloggerB /> },
   ];
 
@@ -89,7 +89,7 @@ const HeaderNav = ({ open, setOpen, isLoggedIn, data, avatar, content }) => {
                 className="flex items-center gap-2 px-6 py-2 text-sm font-medium text-white bg-gradient-to-r from-blue-500 to-purple-600 rounded-full hover:from-blue-600 hover:to-purple-700 transition-all duration-300 hover:scale-105 hover:shadow-lg transform"
               >
                 <FaSignInAlt />
-                Account
+                Tài khoản
                 <FaChevronDown
                   className={`text-xs transition-transform duration-300 ${
                     authDropdownOpen ? "rotate-180" : ""
@@ -113,8 +113,8 @@ const HeaderNav = ({ open, setOpen, isLoggedIn, data, avatar, content }) => {
                   >
                     <FaUserPlus className="text-blue-500" />
                     <div>
-                      <div className="font-medium">Create Account</div>
-                      <div className="text-xs text-gray-500">Join us today</div>
+                      <div className="font-medium">Tạo tài khoản</div>
+                      <div className="text-xs text-gray-500">Tham gia ngay</div>
                     </div>
                   </Link>
                   <Link
@@ -124,8 +124,10 @@ const HeaderNav = ({ open, setOpen, isLoggedIn, data, avatar, content }) => {
                   >
                     <FaSignInAlt className="text-purple-500" />
                     <div>
-                      <div className="font-medium">Sign In</div>
-                      <div className="text-xs text-gray-500">Welcome back</div>
+                      <div className="font-medium">Đăng nhập</div>
+                      <div className="text-xs text-gray-500">
+                        chào mừng trở lại
+                      </div>
                     </div>
                   </Link>
                 </div>

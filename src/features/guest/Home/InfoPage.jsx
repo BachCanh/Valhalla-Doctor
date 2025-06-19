@@ -31,7 +31,7 @@ const InfoPage = () => {
               </p>
               <div className="text-center">
                 <Link
-                  to="/"
+                  to="/about"
                   className="inline-block bg-white/20 px-8 py-2 text-white rounded-full transition-all duration-400 ease-in-out hover:text-[#1977cc] hover:bg-white no-underline"
                 >
                   Tìm Hiểu Thêm{" "}
