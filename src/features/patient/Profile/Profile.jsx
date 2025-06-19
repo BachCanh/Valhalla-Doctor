@@ -259,7 +259,7 @@ function Profile() {
               <label className="inline-flex items-center">
                 <input
                   type="radio"
-                  value="female"
+                  value="fem"
                   disabled={!isEditing}
                   className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300"
                   {...register("gender", {
