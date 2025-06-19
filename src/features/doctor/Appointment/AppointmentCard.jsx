@@ -1,14 +1,19 @@
+import React, { useState } from "react";
 import {
   FaUser,
   FaRegClock,
   FaStickyNote,
   FaCalendarAlt,
+  FaTimes,
 } from "react-icons/fa";
+import { useDoctorUpdateStatus } from "../../../hooks/useDoctorUpdateStatus";
+function DoctorAppointmentCard({ appointment, onStatusChange }) {
+  const [showOverlay, setShowOverlay] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-function DoctorAppointmentCard({ appointment }) {
-  const { appoint_taken_date, appointment_time, status, note, Patient } =
+  const { appoint_taken_date, appointment_time, status, note, Patient, id } =
     appointment;
-
+  const { updateStatus, isLoading, error } = useDoctorUpdateStatus();
   const patientName = Patient?.User?.fullname || "Không rõ";
   const patientPhone = Patient?.User?.phone_number || "Không có số";
   const patientGender = Patient?.gender === "male" ? "Nam" : "Nữ";
@@ -45,6 +50,16 @@ function DoctorAppointmentCard({ appointment }) {
       };
     }
 
+    if (status === "completed") {
+      return {
+        label: "Đã hoàn thành",
+        gradient: "bg-gradient-to-r from-blue-400 to-blue-600",
+        bg: "bg-blue-50",
+        border: "border-blue-200",
+        icon: "✔️",
+      };
+    }
+
     return {
       label: "Đã qua",
       gradient: "bg-gradient-to-r from-gray-400 to-gray-500",
@@ -56,9 +71,112 @@ function DoctorAppointmentCard({ appointment }) {
 
   const statusConfig = getStatusConfig();
 
+  // Overlay action buttons logic
+  let actions = [];
+  if (status === "scheduled") {
+    actions = [
+      {
+        label: "Xác nhận",
+        value: "confirmed",
+        color: "bg-emerald-500 hover:bg-emerald-600",
+      },
+      {
+        label: "Từ chối",
+        value: "rejected",
+        color: "bg-red-500 hover:bg-red-600",
+      },
+    ];
+  } else if (status === "confirmed") {
+    actions = [
+      {
+        label: "Hoàn thành",
+        value: "completed",
+        color: "bg-blue-600 hover:bg-blue-700",
+      },
+      {
+        label: "Hủy",
+        value: "cancelled",
+        color: "bg-red-500 hover:bg-red-600",
+      },
+    ];
+  }
+
+  const handleStatusChange = async (newStatus) => {
+    setLoading(true);
+    updateStatus({ appointmentId: id, status: newStatus });
+    setLoading(false);
+    setShowOverlay(false);
+  };
+
   return (
     <div className="group relative">
-      <div className="relative bg-white/70 backdrop-blur-sm rounded-2xl p-6 border border-white/30 shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-white/80 overflow-hidden">
+      {/* Overlay */}
+      {showOverlay && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+          <div className="bg-white rounded-2xl shadow-2xl p-8 min-w-[320px] max-w-[90vw] relative">
+            <button
+              className="absolute top-3 right-3 text-gray-400 hover:text-gray-700 text-xl"
+              onClick={() => setShowOverlay(false)}
+              aria-label="Đóng"
+            >
+              <FaTimes />
+            </button>
+            <h2 className="text-xl font-bold mb-4 text-blue-700">
+              Cập nhật trạng thái lịch hẹn
+            </h2>
+            <div className="mb-6">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="font-semibold text-gray-700">
+                  Trạng thái hiện tại:
+                </span>
+                <span
+                  className={`px-3 py-1 rounded-full text-white text-sm font-semibold ${statusConfig.gradient}`}
+                >
+                  {statusConfig.label}
+                </span>
+              </div>
+              <div className="text-gray-500 text-sm">
+                {status === "scheduled" &&
+                  "Bạn có thể xác nhận hoặc từ chối lịch hẹn này."}
+                {status === "confirmed" &&
+                  "Bạn có thể hoàn thành hoặc hủy lịch hẹn này."}
+                {(status === "cancelled" ||
+                  status === "rejected" ||
+                  status === "completed") &&
+                  "Không thể thay đổi trạng thái này."}
+              </div>
+            </div>
+            <div className="flex gap-4">
+              {actions.map((action) => (
+                <button
+                  key={action.value}
+                  className={`flex-1 py-2 px-4 rounded-lg text-white font-bold text-base transition ${action.color} disabled:opacity-60`}
+                  onClick={() => handleStatusChange(action.value)}
+                  disabled={loading}
+                >
+                  {loading ? "Đang xử lý..." : action.label}
+                </button>
+              ))}
+              {actions.length === 0 && (
+                <button
+                  className="flex-1 py-2 px-4 rounded-lg bg-gray-300 text-gray-600 font-bold text-base cursor-not-allowed"
+                  disabled
+                >
+                  Không có hành động
+                </button>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      <div
+        className="relative bg-white/70 backdrop-blur-sm rounded-2xl p-6 border border-white/30 shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-white/80 overflow-hidden cursor-pointer"
+        onClick={() => setShowOverlay(true)}
+        tabIndex={0}
+        role="button"
+        aria-label="Chỉnh sửa trạng thái lịch hẹn"
+      >
         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500"></div>
 
         <div className="flex items-start justify-between mb-5">
