@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button, Tooltip, Badge, Modal, Card, Alert } from "antd";
 import moment from "moment";
+import "moment/locale/vi"; // Thêm locale tiếng Việt
 import {
   ClockCircleOutlined,
   CalendarOutlined,
@@ -9,6 +10,9 @@ import {
   WarningOutlined,
   CheckCircleOutlined,
 } from "@ant-design/icons";
+
+// Thiết lập locale cho moment.js
+moment.locale("vi");
 
 const doctorTimeSlot = [
   "08:00 AM",
@@ -30,6 +34,17 @@ const doctorTimeSlot = [
   "05:00 PM",
 ];
 
+// Hàm chuyển đổi thời gian sang định dạng tiếng Việt
+const formatTimeToVietnamese = (time) => {
+  if (!time) return "";
+  const [hourMin, period] = time.split(" ");
+  if (period === "AM") {
+    return `${hourMin} sáng`;
+  } else {
+    return `${hourMin} chiều`;
+  }
+};
+
 function SelectApppointment({
   selectedDate,
   handleDateChange,
@@ -40,11 +55,11 @@ function SelectApppointment({
   isSlotBusy,
   zoomPreview,
   setZoomPreview,
-  validationError = false, // New prop for displaying validation error
-  setValidationError = () => {}, // Function to set validation error
+  validationError = false,
+  setValidationError = () => {},
 }) {
   const [activeTab, setActiveTab] = useState("calendar");
-  const [viewType, setViewType] = useState("calendar"); // calendar or list
+  const [viewType, setViewType] = useState("calendar");
   const [showDateAlert, setShowDateAlert] = useState(false);
   const [showTimeAlert, setShowTimeAlert] = useState(false);
 
@@ -82,8 +97,8 @@ function SelectApppointment({
       {/* Validation Alert - Show when user tries to continue without selections */}
       {validationError && (
         <Alert
-          message="Missing Information"
-          description="Please select both a date and time for your appointment before continuing."
+          message="Thông tin chưa đầy đủ"
+          description="Vui lòng chọn cả ngày và giờ cho lịch hẹn trước khi tiếp tục."
           type="error"
           showIcon
           closable
@@ -97,17 +112,15 @@ function SelectApppointment({
         <div className="lg:w-5/12">
           <div className="mb-4 flex justify-between items-center">
             <div>
-              <h3 className="text-lg font-medium text-[#2c4964]">
-                Select a Date
-              </h3>
+              <h3 className="text-lg font-medium text-[#2c4964]">Chọn ngày</h3>
               <p className="text-gray-500 text-sm mt-1">
-                Choose from available days
+                Chọn một trong những ngày có sẵn
               </p>
             </div>
 
             {showDateAlert && (
               <div className="inline-flex items-center text-red-500 text-xs">
-                <WarningOutlined className="mr-1" /> Required
+                <WarningOutlined className="mr-1" /> Bắt buộc
               </div>
             )}
           </div>
@@ -145,7 +158,7 @@ function SelectApppointment({
                     {moment(date).format("MMMM")}
                   </div>
                   <div className="mt-2">
-                    <Badge status="success" text="Available" />
+                    <Badge status="success" text="Có lịch trống" />
                   </div>
                 </div>
               </Card>
@@ -160,23 +173,23 @@ function SelectApppointment({
               <h3 className="text-lg font-medium text-[#2c4964]">
                 {selectedDate ? (
                   <span>
-                    Available Times for{" "}
-                    {moment(selectedDate).format("ddd, MMM D")}
+                    Giờ khám có sẵn ngày{" "}
+                    {moment(selectedDate).format("ddd, [ngày] D [tháng] M")}
                   </span>
                 ) : (
-                  "Select a date to view available times"
+                  "Vui lòng chọn ngày để xem giờ khám"
                 )}
               </h3>
               {selectedDate && (
                 <p className="text-gray-500 text-sm mt-1">
-                  All appointment times are in your local timezone
+                  Tất cả thời gian hiển thị theo múi giờ của bạn
                 </p>
               )}
             </div>
 
             {selectedDate && showTimeAlert && (
               <div className="inline-flex items-center text-red-500 text-xs">
-                <WarningOutlined className="mr-1" /> Time selection required
+                <WarningOutlined className="mr-1" /> Chưa chọn giờ
               </div>
             )}
           </div>
@@ -192,9 +205,9 @@ function SelectApppointment({
               {/* Morning Slots */}
               <div>
                 <h4 className="flex items-center text-[#2c4964] mb-3">
-                  <ClockCircleOutlined className="mr-2" /> Morning
+                  <ClockCircleOutlined className="mr-2" /> Buổi sáng
                   <span className="ml-2 text-xs text-gray-500">
-                    (8:00 AM - 12:00 PM)
+                    (8:00 - 12:00)
                   </span>
                 </h4>
                 <div className="grid grid-cols-3 md:grid-cols-4 gap-2">
@@ -207,8 +220,8 @@ function SelectApppointment({
                         key={id}
                         title={
                           isBusy
-                            ? "This slot is already booked"
-                            : `30 min appointment at ${item}`
+                            ? "Khung giờ này đã được đặt"
+                            : `Khám 30 phút lúc ${formatTimeToVietnamese(item)}`
                         }
                       >
                         <div className="relative">
@@ -226,7 +239,7 @@ function SelectApppointment({
                             onClick={() => !isBusy && handleSelectTime(item)}
                             disabled={isBusy}
                           >
-                            {item}
+                            {formatTimeToVietnamese(item)}
                           </Button>
                         </div>
                       </Tooltip>
@@ -238,9 +251,9 @@ function SelectApppointment({
               {/* Afternoon Slots */}
               <div>
                 <h4 className="flex items-center text-[#2c4964] mb-3">
-                  <ClockCircleOutlined className="mr-2" /> Afternoon
+                  <ClockCircleOutlined className="mr-2" /> Buổi chiều
                   <span className="ml-2 text-xs text-gray-500">
-                    (1:00 PM - 5:00 PM)
+                    (13:00 - 17:00)
                   </span>
                 </h4>
                 <div className="grid grid-cols-3 md:grid-cols-4 gap-2">
@@ -253,8 +266,8 @@ function SelectApppointment({
                         key={id}
                         title={
                           isBusy
-                            ? "This slot is already booked"
-                            : `30 min appointment at ${item}`
+                            ? "Khung giờ này đã được đặt"
+                            : `Khám 30 phút lúc ${formatTimeToVietnamese(item)}`
                         }
                       >
                         <div className="relative">
@@ -272,7 +285,7 @@ function SelectApppointment({
                             onClick={() => !isBusy && handleSelectTime(item)}
                             disabled={isBusy}
                           >
-                            {item}
+                            {formatTimeToVietnamese(item)}
                           </Button>
                         </div>
                       </Tooltip>
@@ -285,7 +298,7 @@ function SelectApppointment({
             <div className="flex flex-col items-center justify-center p-12 bg-gray-50 rounded-lg border border-dashed border-gray-300">
               <CalendarOutlined className="text-4xl text-gray-400 mb-3" />
               <p className="text-gray-500">
-                Please select a date to see available time slots
+                Vui lòng chọn một ngày để xem các khung giờ khám có sẵn
               </p>
             </div>
           )}
@@ -299,14 +312,15 @@ function SelectApppointment({
             <div className="text-yellow-500 flex items-center">
               <WarningOutlined className="mr-2" />
               {!selectedDate
-                ? "Please select a date first"
-                : "Please select a time slot to continue"}
+                ? "Vui lòng chọn ngày khám trước"
+                : "Vui lòng chọn giờ khám để tiếp tục"}
             </div>
           ) : (
             <div className="text-green-500 flex items-center">
               <CheckCircleOutlined className="mr-2" />
-              Your appointment is set for{" "}
-              {moment(selectedDate).format("MMM D, YYYY")} at {selectTime}
+              Lịch hẹn của bạn là vào{" "}
+              {moment(selectedDate).format("DD/MM/YYYY")} lúc{" "}
+              {formatTimeToVietnamese(selectTime)}
             </div>
           )}
         </div>
@@ -314,12 +328,12 @@ function SelectApppointment({
 
       {/* Zoom Preview Modal */}
       <Modal
-        title="Zoom Meeting Preview"
+        title="Xem trước buổi tư vấn trực tuyến"
         open={zoomPreview}
         onCancel={() => setZoomPreview(false)}
         footer={[
           <Button key="close" onClick={() => setZoomPreview(false)}>
-            Close
+            Đóng
           </Button>,
         ]}
         width={700}
@@ -328,14 +342,14 @@ function SelectApppointment({
           <div className="flex justify-between items-center mb-6">
             <div className="flex items-center">
               <div className="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold">
-                {doctor.name?.charAt(0) || "D"}
+                {doctor.name?.charAt(0) || "BS"}
               </div>
               <div className="ml-3">
                 <p className="font-medium">
-                  {doctor.name || "Doctor"}'s Meeting Room
+                  Phòng khám của {doctor.name || "Bác sĩ"}
                 </p>
                 <p className="text-xs text-gray-300">
-                  Meeting ID: 123 456 7890
+                  ID Phòng khám: 123 456 7890
                 </p>
               </div>
             </div>
@@ -346,7 +360,7 @@ function SelectApppointment({
                 size="small"
                 icon={<CloseCircleOutlined />}
               >
-                Leave
+                Rời khỏi
               </Button>
             </div>
           </div>
@@ -358,11 +372,11 @@ function SelectApppointment({
                   doctor.avatar ||
                   "https://static.vecteezy.com/system/resources/previews/015/412/022/non_2x/doctor-round-avatar-medicine-flat-avatar-with-male-doctor-medical-clinic-team-round-icon-medical-collection-illustration-vector.jpg"
                 }
-                alt="Doctor"
+                alt="Bác sĩ"
                 className="h-32 w-32 rounded-lg object-cover"
               />
               <div className="absolute bottom-2 left-2 bg-black/50 text-white text-xs py-1 px-2 rounded">
-                Dr. {doctor.name || "Doctor"}
+                BS. {doctor.name || "Bác sĩ"}
               </div>
             </div>
             <div className="h-48 bg-gray-700 rounded-lg flex items-center justify-center relative">
@@ -370,16 +384,15 @@ function SelectApppointment({
                 <UserOutlined className="text-5xl text-gray-400" />
               </div>
               <div className="absolute bottom-2 left-2 bg-black/50 text-white text-xs py-1 px-2 rounded">
-                You
+                Bạn
               </div>
             </div>
           </div>
 
           <div className="mt-6 text-center">
             <p className="text-gray-300 text-sm">
-              This is a preview of how your online consultation will look. On
-              the day of your appointment, you'll receive a link to join the
-              actual meeting.
+              Đây là bản xem trước buổi tư vấn trực tuyến. Vào ngày hẹn, bạn sẽ
+              nhận được liên kết để tham gia cuộc gọi thực tế với bác sĩ.
             </p>
           </div>
         </div>

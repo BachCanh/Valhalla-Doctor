@@ -9,6 +9,7 @@ import {
   Tooltip,
 } from "antd";
 import moment from "moment";
+import "moment/locale/vi"; // Thêm locale tiếng Việt
 import { useState, useEffect, useMemo } from "react";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
 import SelectApppointment from "./SelectApppointment";
@@ -27,8 +28,10 @@ import {
   StarFilled,
   CheckOutlined,
 } from "@ant-design/icons";
-import PatientInformation from "./PatientInformation";
 import confetti from "canvas-confetti";
+
+// Thiết lập locale cho moment.js
+moment.locale("vi");
 
 function AppointmentPage() {
   const navigate = useNavigate();
@@ -63,25 +66,25 @@ function AppointmentPage() {
 
   // Memoized doctor rating
   const doctorRating = useMemo(() => {
-    return (Math.random() * 2 + 3).toFixed(1); // Random rating between 3 and 5
+    return (Math.random() * 2 + 3).toFixed(1); // Đánh giá ngẫu nhiên từ 3 đến 5
   }, [doctorId]);
 
   // Step configuration
   const steps = [
     {
-      title: "Select Time",
+      title: "Chọn thời gian",
       icon: <CalendarOutlined />,
-      description: "Choose appointment date and time",
+      description: "Chọn ngày và giờ khám",
     },
     {
-      title: "Add Details",
+      title: "Thông tin bổ sung",
       icon: <FileTextOutlined />,
-      description: "Provide appointment details",
+      description: "Cung cấp chi tiết cuộc hẹn",
     },
     {
-      title: "Confirm",
+      title: "Xác nhận",
       icon: <CheckCircleOutlined />,
-      description: "Review and confirm booking",
+      description: "Xem lại và xác nhận đặt lịch",
     },
   ];
 
@@ -113,7 +116,7 @@ function AppointmentPage() {
   // Handle confirm schedule function
   const handleConfirmSchedule = () => {
     if (!isAppointmentSelected) {
-      message.error("Please select both date and time for your appointment");
+      message.error("Vui lòng chọn cả ngày và giờ cho lịch hẹn của bạn");
       return;
     }
 
@@ -127,7 +130,7 @@ function AppointmentPage() {
       notes: notes,
     };
 
-    console.log("Appointment data:", appointmentData);
+    console.log("Thông tin lịch hẹn:", appointmentData);
     bookAppointment(appointmentData);
   };
 
@@ -156,7 +159,7 @@ function AppointmentPage() {
   // Next step handler
   const handleNextStep = () => {
     if (currentStep === 0 && !isAppointmentSelected) {
-      message.warning("Please select both date and time before continuing");
+      message.warning("Vui lòng chọn cả ngày và giờ trước khi tiếp tục");
       return;
     }
     setCurrentStep(currentStep + 1);
@@ -189,18 +192,16 @@ function AppointmentPage() {
           <div className="space-y-6">
             <div className="bg-gray-50 p-6 rounded-lg shadow-sm">
               <h3 className="text-lg font-medium text-[#2c4964] mb-4">
-                Additional Information
+                Thông tin bổ sung
               </h3>
-
-              <PatientInformation />
 
               <div className="mt-6">
                 <h4 className="text-[#2c4964] font-medium mb-3">
                   <FileTextOutlined className="mr-2" />
-                  Notes for Doctor
+                  Ghi chú cho Bác sĩ
                 </h4>
                 <Input.TextArea
-                  placeholder="Describe your symptoms or any specific concerns you'd like to discuss..."
+                  placeholder="Mô tả triệu chứng hoặc bất kỳ vấn đề cụ thể nào bạn muốn trao đổi..."
                   rows={4}
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
@@ -216,15 +217,17 @@ function AppointmentPage() {
         return (
           <div className="bg-gray-50 p-6 rounded-lg shadow-sm">
             <h3 className="text-lg font-medium text-[#2c4964] mb-6">
-              Appointment Summary
+              Tóm tắt lịch hẹn
             </h3>
             <div className="space-y-5">
               <div className="flex items-start space-x-3 p-3 bg-blue-50 rounded-lg border border-blue-100">
                 <CalendarOutlined className="text-blue-600 text-xl" />
                 <div>
-                  <h4 className="font-medium text-gray-900">Date & Time</h4>
+                  <h4 className="font-medium text-gray-900">Ngày & Giờ</h4>
                   <p className="text-gray-600">
-                    {moment(selectedDate).format("dddd, MMMM D, YYYY")}
+                    {moment(selectedDate).format(
+                      "dddd, [ngày] D [tháng] M, YYYY"
+                    )}
                   </p>
                   <p className="text-gray-600">
                     {selectTime} -{" "}
@@ -238,11 +241,9 @@ function AppointmentPage() {
               <div className="flex items-start space-x-3 p-3 bg-green-50 rounded-lg border border-green-100">
                 <UserOutlined className="text-green-600 text-xl" />
                 <div>
-                  <h4 className="font-medium text-gray-900">Doctor</h4>
-                  <p className="text-gray-600">{doctor.name || "Doctor"}</p>
-                  <p className="text-gray-600">
-                    {doctor.department || "Medical Department"}
-                  </p>
+                  <h4 className="font-medium text-gray-900">Bác sĩ</h4>
+                  <p className="text-gray-600">{doctor.name || "Bác sĩ"}</p>
+                  <p className="text-gray-600">{doctor.department || "Khoa"}</p>
                   {doctor.specialty && (
                     <p className="text-gray-600">{doctor.specialty}</p>
                   )}
@@ -253,7 +254,9 @@ function AppointmentPage() {
                 <div className="flex items-start space-x-3 p-3 bg-yellow-50 rounded-lg border border-yellow-100">
                   <FileTextOutlined className="text-yellow-600 text-xl" />
                   <div>
-                    <h4 className="font-medium text-gray-900">Your Notes</h4>
+                    <h4 className="font-medium text-gray-900">
+                      Ghi chú của bạn
+                    </h4>
                     <p className="text-gray-600">{notes}</p>
                   </div>
                 </div>
@@ -261,13 +264,13 @@ function AppointmentPage() {
 
               <div className="p-4 bg-gray-100 rounded-lg border border-gray-200">
                 <h4 className="font-medium text-gray-900 mb-2">
-                  Important Information
+                  Thông tin quan trọng
                 </h4>
                 <ul className="list-disc list-inside text-gray-600 space-y-1 text-sm">
-                  <li>Please arrive 15 minutes before your appointment time</li>
-                  <li>Bring your insurance card and ID</li>
-                  <li>Wear a mask during your visit</li>
-                  <li>You can cancel or reschedule up to 24 hours before</li>
+                  <li>Vui lòng đến trước giờ hẹn 15 phút</li>
+                  <li>Mang theo thẻ bảo hiểm và giấy tờ tùy thân</li>
+                  <li>Đeo khẩu trang trong suốt thời gian khám</li>
+                  <li>Bạn có thể hủy hoặc đổi lịch hẹn trước 24 giờ</li>
                 </ul>
               </div>
             </div>
@@ -285,12 +288,12 @@ function AppointmentPage() {
           <CheckCircleOutlined className="text-green-600 text-6xl" />
         </div>
         <h2 className="text-2xl font-bold text-gray-800 mb-2">
-          Appointment Booked Successfully!
+          Đặt lịch khám thành công!
         </h2>
         <p className="text-gray-600 text-center max-w-md mb-6">
-          Your appointment with Dr. {doctor.name || "Doctor"} on{" "}
-          {moment(selectedDate).format("dddd, MMMM D")} at {selectTime} has been
-          confirmed.
+          Lịch hẹn của bạn với BS. {doctor.name || "Bác sĩ"} vào ngày{" "}
+          {moment(selectedDate).format("dddd, [ngày] D [tháng] M")} lúc{" "}
+          {selectTime} đã được xác nhận.
         </p>
         <div className="space-y-3 w-full max-w-md">
           <Button
@@ -299,7 +302,7 @@ function AppointmentPage() {
             block
             onClick={() => navigate("/")}
           >
-            Go to Dashboard
+            Về Trang chủ
           </Button>
           <Button
             type="default"
@@ -307,7 +310,7 @@ function AppointmentPage() {
             block
             onClick={() => navigate("/departments")}
           >
-            Browse More Services
+            Xem thêm dịch vụ
           </Button>
         </div>
       </div>
@@ -335,18 +338,18 @@ function AppointmentPage() {
                       doctor.avatar ||
                       "https://static.vecteezy.com/system/resources/previews/015/412/022/non_2x/doctor-round-avatar-medicine-flat-avatar-with-male-doctor-medical-clinic-team-round-icon-medical-collection-illustration-vector.jpg"
                     }
-                    alt={doctor.name || "Doctor"}
+                    alt={doctor.name || "Bác sĩ"}
                     className="w-20 h-20 rounded-full object-cover border-4 border-white shadow-md"
                   />
                   <span className="absolute bottom-0 right-0 w-5 h-5 bg-green-500 border-2 border-white rounded-full"></span>
                 </div>
                 <div className="ml-4">
                   <h1 className="text-2xl font-bold">
-                    {doctor.name || "Doctor"}
+                    {doctor.name || "Bác sĩ"}
                   </h1>
                   <div className="flex items-center space-x-2 mt-1">
                     <span className="bg-blue-700 text-xs px-2 py-1 rounded-full">
-                      {doctor.department || "General Medicine"}
+                      {doctor.department || "Khoa Đa khoa"}
                     </span>
                   </div>
                 </div>
@@ -376,12 +379,12 @@ function AppointmentPage() {
               disabled={currentStep === 0}
               size="large"
             >
-              Back
+              {currentStep === 0 ? "Hủy" : "Quay lại"}
             </Button>
             <div>
               {currentStep < steps.length - 1 ? (
                 <Button type="primary" size="large" onClick={handleNextStep}>
-                  Continue
+                  Tiếp tục
                 </Button>
               ) : (
                 <Button
@@ -391,7 +394,7 @@ function AppointmentPage() {
                   loading={isLoading || isBooking}
                   disabled={!isAppointmentSelected}
                 >
-                  Confirm Appointment
+                  Xác nhận đặt lịch
                 </Button>
               )}
             </div>
