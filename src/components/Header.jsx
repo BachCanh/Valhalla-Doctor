@@ -3,6 +3,7 @@ import avatar from "../../public/favicon.png";
 import { useAuthContext } from "../context/AuthContext";
 import Logo from "../components/Logo";
 import { useState } from "react";
+import { Link } from "react-router";
 const Header = () => {
   const dummyUser = {
     firstName: "John",
@@ -17,12 +18,12 @@ const Header = () => {
       <div className="mb-3">
         <h5 className="font-semibold capitalize">{`${dummyUser.firstName} ${dummyUser.lastName}`}</h5>
         <p className="text-xs text-gray-500">{dummyUser.email}</p>
-        <a
-          href="/dashboard"
+        <Link
+          to="/customer/appointment-history"
           className="text-blue-600 hover:underline text-sm block mt-1"
         >
           Go to Dashboard
-        </a>
+        </Link>
       </div>
       <button className="w-full text-red-600 text-sm font-medium hover:underline">
         Log Out

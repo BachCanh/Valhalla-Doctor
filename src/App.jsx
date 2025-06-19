@@ -10,6 +10,7 @@ import AuthProvider from "./context/AuthContext";
 import { ToastContainer } from "react-toastify";
 import Contact from "./features/guest/Contact/Contact";
 import Blog from "./features/guest/Blog/Blog";
+import Profile from "./features/patient/Profile/Profile";
 
 // Lazy-loaded routes
 const HomePageGuest = lazy(() => import("./features/guest/Home/HomePage"));
@@ -54,6 +55,7 @@ function App() {
                 path="/customer/appointment-history"
                 element={<AppointmentHistory />}
               />
+              <Route index path="/customer/profile" element={<Profile />} />
             </Route>
           </Routes>
 
