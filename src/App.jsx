@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router";
 import { lazy } from "react";
 import GeneralLayout from "./layouts/GeneralLayout";
 import PatientLayout from "./layouts/PatientLayout/PatientLayout";
+import DoctorLayout from "./layouts/DoctorLayout/DoctorLayout";
 
 import TrackSymtomsPage from "./features/guest/TrackSymptoms/TrackSymptomsPage";
 import AuthProvider from "./context/AuthContext";
@@ -58,6 +59,13 @@ function App() {
                 index
                 path="/customer/appointment-history"
                 element={<AppointmentHistory />}
+              />
+            </Route>
+            <Route element={<DoctorLayout />}>
+              <Route
+                index
+                path="/doctor/appointments"
+                element={<DoctorAppointments />}
               />
             </Route>
           </Routes>

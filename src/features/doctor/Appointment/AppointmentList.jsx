@@ -113,7 +113,7 @@ const DUMMY_API_RESPONSE = {
 function DoctorAppointment() {
     const [status, setStatus] = useState("all");
     const [page, setPage] = useState(1);
-    const limit = 2;
+    const limit = 4;
     const { isAuthenticated, loading } = useAuthContext();
 
     // const {
