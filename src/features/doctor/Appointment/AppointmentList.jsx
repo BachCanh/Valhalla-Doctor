@@ -112,6 +112,8 @@ const DUMMY_API_RESPONSE = {
 
 function DoctorAppointment() {
     const [status, setStatus] = useState("all");
+    const [selectedAppointment, setSelectedAppointment] = useState(null);
+    const [showOverlay, setShowOverlay] = useState(false);
     const [page, setPage] = useState(1);
     const limit = 2;
     const { isAuthenticated, loading } = useAuthContext();
@@ -181,6 +183,29 @@ function DoctorAppointment() {
     const totalFiltered = filteredAppointments.length;
     const totalPages = Math.max(1, Math.ceil(totalFiltered / limit));
     const paginatedAppointments = filteredAppointments.slice((page - 1) * limit, page * limit);
+
+    // Khi click vào card
+    const handleCardClick = (appointment) => {
+        setSelectedAppointment(appointment);
+        setShowOverlay(true);
+    };
+
+    // Đóng overlay
+    const handleCloseOverlay = () => {
+        setShowOverlay(false);
+        setSelectedAppointment(null);
+    };
+
+    // Xử lý accept/reject (dummy)
+    const handleAccept = () => {
+        alert("Đã accept!");
+        handleCloseOverlay();
+    };
+    const handleReject = () => {
+        alert("Đã reject!");
+        handleCloseOverlay();
+    };
+
     return (
         <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
             <div className="max-w-7xl mx-auto pt-8 pb-16 px-4">
@@ -216,8 +241,8 @@ function DoctorAppointment() {
                                     <button
                                         key={type}
                                         className={`relative px-8 py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 ${isActive
-                                            ? `${config.gradient} text-white shadow-lg shadow-blue-500/25`
-                                            : "text-gray-700 hover:bg-gray-100/80 hover:shadow-md"
+                                                ? `${config.gradient} text-white shadow-lg shadow-blue-500/25`
+                                                : "text-gray-700 hover:bg-gray-100/80 hover:shadow-md"
                                             }`}
                                         onClick={() => {
                                             setStatus(type);
@@ -303,12 +328,53 @@ function DoctorAppointment() {
                                         animationDelay: `${index * 100}ms`,
                                         animationFillMode: "both",
                                     }}
+                                    onClick={() => handleCardClick(appointment)}
                                 >
-                                    <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-white/20 overflow-hidden">
+                                    <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-white/20 overflow-hidden cursor-pointer">
                                         <AppointmentCard appointment={appointment} />
                                     </div>
                                 </div>
                             ))}
+                        </div>
+                    )}
+
+                    {/* Overlay Form */}
+                    {showOverlay && selectedAppointment && (
+                        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+                            <div className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md relative animate-fade-in">
+                                <button
+                                    className="absolute top-3 right-3 text-gray-400 hover:text-gray-700 text-2xl"
+                                    onClick={handleCloseOverlay}
+                                >
+                                    ×
+                                </button>
+                                <h2 className="text-2xl font-bold mb-4 text-blue-700">Xử lý lịch hẹn</h2>
+                                <div className="mb-4">
+                                    <div className="font-medium mb-1">Bệnh nhân:</div>
+                                    <div className="mb-2">{selectedAppointment.Patient?.User?.fullname}</div>
+                                    <div className="font-medium mb-1">Ngày giờ:</div>
+                                    <div className="mb-2">
+                                        {new Date(selectedAppointment.appoint_taken_date).toLocaleString("vi-VN")}<br />
+                                        {selectedAppointment.appointment_time}
+                                    </div>
+                                    <div className="font-medium mb-1">Ghi chú:</div>
+                                    <div className="mb-2">{selectedAppointment.note || "Không có"}</div>
+                                </div>
+                                <div className="flex gap-4 mt-6">
+                                    <button
+                                        className="flex-1 py-2 rounded-lg bg-green-500 text-white font-semibold hover:bg-green-600 transition"
+                                        onClick={handleAccept}
+                                    >
+                                        Accept
+                                    </button>
+                                    <button
+                                        className="flex-1 py-2 rounded-lg bg-red-500 text-white font-semibold hover:bg-red-600 transition"
+                                        onClick={handleReject}
+                                    >
+                                        Reject
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     )}
                 </div>
@@ -342,8 +408,8 @@ function DoctorAppointment() {
                                             <button
                                                 key={pageNum}
                                                 className={`w-12 h-12 rounded-xl font-bold transition-all duration-300 transform hover:scale-110 ${page === pageNum
-                                                    ? "bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-lg shadow-blue-500/30"
-                                                    : "bg-gray-100 text-gray-700 hover:bg-gray-200 shadow-md"
+                                                        ? "bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-lg shadow-blue-500/30"
+                                                        : "bg-gray-100 text-gray-700 hover:bg-gray-200 shadow-md"
                                                     }`}
                                                 onClick={() => setPage(pageNum)}
                                             >
