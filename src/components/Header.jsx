@@ -1,6 +1,8 @@
 import HeaderNav from "./HeaderNav";
 import avatar from "../../public/favicon.png";
-
+import { useAuthContext } from "../context/AuthContext";
+import Logo from "../components/Logo";
+import { useState } from "react";
 const Header = () => {
   const dummyUser = {
     firstName: "John",
@@ -8,7 +10,8 @@ const Header = () => {
     email: "john.doe@example.com",
     img: null,
   };
-
+  const { isAuthenticated, loading } = useAuthContext();
+  const [open, setIsOpen] = useState(false);
   const content = (
     <div className="p-4 text-sm text-gray-700">
       <div className="mb-3">
@@ -30,13 +33,16 @@ const Header = () => {
   return (
     <header className="w-full bg-white shadow-md fixed top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+        <Logo />
         <HeaderNav
-          isLoggedIn={true}
+          isLoggedIn={isAuthenticated}
           data={dummyUser}
           avatar={avatar}
           content={content}
-          open={false}
-          setOpen={() => {}}
+          open={open}
+          setOpen={() => {
+            setIsOpen((c) => !c);
+          }}
         />
       </div>
     </header>

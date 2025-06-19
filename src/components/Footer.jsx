@@ -160,13 +160,13 @@ const Footer = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="col-span-1">
               <div>
-                <p className="mb-0 text-white text-[15px]">
+                <div className="mb-0 text-white text-[15px]">
                   <div className="text-center">
                     <p className="text-white">
                       Copyright {new Date().getFullYear()} All Rights Reserved
                     </p>
                   </div>
-                </p>
+                </div>
               </div>
             </div>
             <div className="col-span-1">
